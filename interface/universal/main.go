@@ -1,5 +1,5 @@
 /*
-Copyright 2013-2016 by Milo Christiansen
+Copyright 2013-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -28,23 +28,23 @@ import "fmt"
 import "io/ioutil"
 import "runtime"
 
-import "rubble8"
-import "rubble8/rblutil"
+import "github.com/milochristiansen/rubble8"
+import "github.com/milochristiansen/rubble8/rblutil"
 
 // Most of the actual guts of this interface are over here
-import "rubble8/rblutil/actions"
+import "github.com/milochristiansen/rubble8/rblutil/actions"
 
 // The basic actions
-import _ "rubble8/rblutil/actions/basic"
-import _ "rubble8/rblutil/actions/webui"
+import _ "github.com/milochristiansen/rubble8/rblutil/actions/basic"
+import _ "github.com/milochristiansen/rubble8/rblutil/actions/webui"
 
 // Extra actions
-import _ "rubble8/rblutil/test/actions"
-import _ "rubble8/rblutil/merge/actions"
-import _ "rubble8/rblutil/actions/cntntsrvr"
-import _ "rubble8/scripting/dctech_lua/actions"
+import _ "github.com/milochristiansen/rubble8/rblutil/test/actions"
+import _ "github.com/milochristiansen/rubble8/rblutil/merge/actions"
+import _ "github.com/milochristiansen/rubble8/rblutil/actions/cntntsrvr"
+import _ "github.com/milochristiansen/rubble8/scripting/dctech_lua/actions"
 
-import _ "rubble8/scripting/dctech_lua" // Includes an action in addition to enabling Lua scripting
+import _ "github.com/milochristiansen/rubble8/scripting/dctech_lua" // Includes an action in addition to enabling Lua scripting
 
 func main() {
 	err, log := rblutil.NewLogger()
@@ -68,9 +68,9 @@ func main() {
 			os.Exit(1)
 		}
 	}()
-	
+
 	log.Println("Starting Universal Interface...")
-	
+
 	// Load defaults from config if present
 	log.Println("  Attempting to Read Config File: ./rubble.ini")
 	ini := map[string][]string{}

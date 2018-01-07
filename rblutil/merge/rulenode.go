@@ -1,5 +1,5 @@
 /*
-Copyright 2014-2016 by Milo Christiansen
+Copyright 2014-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -23,7 +23,7 @@ misrepresented as being the original software.
 package merge
 
 import "strconv"
-import "rubble8/rblutil/rparse"
+import "github.com/milochristiansen/rubble8/rblutil/rparse"
 
 // Values for Rule.Mode
 const (
@@ -47,7 +47,7 @@ func (rule Rule) eq(b Rule) bool {
 	if rule.Mode != b.Mode || rule.Min != b.Min || rule.Max != b.Max || len(rule.Items) != len(b.Items) {
 		return false
 	}
-	
+
 	for i := range rule.Items {
 		if rule.Items[i] != b.Items[i] {
 			return false
@@ -96,7 +96,6 @@ func (rule *Rule) strHelper(prefix string) string {
 		return out + "\n}"
 	}
 }
-
 
 func formatRule(rules []Rule, prefix string) string {
 	out := ""
@@ -207,7 +206,7 @@ func (node *RuleNode) strHelper(prefix string) string {
 		}
 		return formatRule(node.Rules[0], prefix) + "\n"
 	}
-	
+
 	out := "{"
 	prefix += "\t"
 	for i := range node.Children {
@@ -225,7 +224,7 @@ func (node *RuleNode) String() string {
 	if len(node.Children) == 0 {
 		return ""
 	}
-	
+
 	return node.strHelper("")
 }
 
@@ -294,21 +293,21 @@ loop:
 			}
 		}
 		e += rule.Min
-		
+
 		// If Min == Max then go on to the next rule.
 		if rule.Min == rule.Max {
 			continue loop
 		}
-		
+
 		// Check the remaining items
-		
+
 		padding := rule.Max - rule.Min
 		if rule.Max < 0 {
 			padding = 500
 		}
-		
+
 		// Scan ahead to find the next hard match
-		
+
 		// Is this the last rule? If so we need to make sure all items are consumed.
 		scanToEnd := true
 		nextRule := rule
@@ -321,9 +320,9 @@ loop:
 			ok = false
 			break loop
 		}
-		
+
 		te := e
-wc:
+	wc:
 		for i := 0; i < padding; i++ {
 			if e+i >= len(elements) {
 				if !scanToEnd {
@@ -332,7 +331,7 @@ wc:
 				}
 				break loop
 			}
-			
+
 			if !scanToEnd {
 				for _, item := range nextRule.Items {
 					if item == elements[e+i] {
@@ -340,7 +339,7 @@ wc:
 					}
 				}
 			}
-			
+
 			switch rule.Mode {
 			case RuleMatch:
 				panic("IMPOSSIBLE!") // RuleMatch rules are always Min == Max == 1
@@ -360,7 +359,7 @@ wc:
 			te++
 		}
 		e = te
-		
+
 		if scanToEnd {
 			// We should be at the end, make sure
 			if e != len(elements) {

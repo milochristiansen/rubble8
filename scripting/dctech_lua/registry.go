@@ -1,5 +1,5 @@
 /*
-Copyright 2015-2016 by Milo Christiansen
+Copyright 2015-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -23,11 +23,11 @@ misrepresented as being the original software.
 package lua
 
 import "github.com/milochristiansen/lua"
-import "rubble8"
+import "github.com/milochristiansen/rubble8"
 
 var listAppend = func(l *lua.State) int {
 	regdata := l.ToUser(1).(rubble8.ScrRegData)
-	
+
 	*regdata.List = append(*regdata.List, l.ToString(2))
 	return 0
 }
@@ -35,7 +35,7 @@ var listAppend = func(l *lua.State) int {
 func rubbleRegistryTbl(l *lua.State) {
 	l.NewTable(0, 1)
 	tidx := l.AbsIndex(-1)
-	
+
 	l.Push("__index")
 	l.Push(func(l *lua.State) int {
 		state := getState(l)
@@ -87,7 +87,7 @@ func rubbleRegistryChildTbl(l *lua.State) {
 	l.Push("__index")
 	l.Push(func(l *lua.State) int {
 		regdata := l.ToUser(1).(rubble8.ScrRegData)
-		
+
 		switch l.ToString(2) {
 		case "listappend":
 			l.Push(listAppend)

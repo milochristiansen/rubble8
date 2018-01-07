@@ -1,5 +1,5 @@
 /*
-Copyright 2015-2016 by Milo Christiansen
+Copyright 2015-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -24,7 +24,7 @@ package lua
 
 import "github.com/milochristiansen/lua"
 
-import "rubble8/rblutil/addon"
+import "github.com/milochristiansen/rubble8/rblutil/addon"
 
 import "math/rand"
 import "time"
@@ -46,7 +46,7 @@ func rubbleRandomTbl(l *lua.State) {
 		case "intn":
 			l.Push(func(l *lua.State) int {
 				rng := l.ToUser(1).(*rand.Rand)
-				
+
 				// You would think that "[0,n]" when describing a range would be inclusive, but apparently not...
 				l.Push(rng.Int63n(l.OptInt(2, 1) + 1))
 				return 1
@@ -73,7 +73,7 @@ func rubbleRandomTbl(l *lua.State) {
 				rng.Seed(int64(crc64.Checksum([]byte(l.ToString(3)), crc64.MakeTable(crc64.ECMA))))
 				return 0
 			}
-			
+
 			rng.Seed(l.ToInt(3))
 		}
 		return 0
@@ -154,7 +154,7 @@ func rubbleStateGlobalFilesTbl(l *lua.State) {
 		return 0
 	})
 	l.SetTableRaw(tidx)
-	
+
 	l.Push("__pairs")
 	l.Push(func(l *lua.State) int {
 		state := getState(l)
@@ -303,7 +303,7 @@ func addonFilemapTbl(l *lua.State) {
 	l.Push("__index")
 	l.Push(func(l *lua.State) int {
 		files := l.ToUser(1).(map[string]*addon.File)
-		file, ok := files[ l.ToString(2)]
+		file, ok := files[l.ToString(2)]
 		if ok {
 			l.Push(file)
 			addonFileTbl(l, false)
@@ -418,7 +418,7 @@ func addonMetaVarmapTbl(l *lua.State) {
 	l.Push("__index")
 	l.Push(func(l *lua.State) int {
 		vars := l.ToUser(1).(map[string]*addon.MetaVar)
-		
+
 		v, ok := vars[l.ToString(2)]
 		if ok {
 			l.Push(v)
@@ -601,12 +601,12 @@ func addonFileTbl(l *lua.State, rw bool) {
 	l.SetTableRaw(tidx)
 
 	if rw {
-		
+
 		l.Push("__newindex")
 		l.Push(func(l *lua.State) int {
 			file := l.ToUser(1).(*addon.File)
 			key := l.OptString(2, "")
-	
+
 			switch key {
 			case "Content":
 				file.Content = []byte(l.ToString(3))
@@ -614,7 +614,7 @@ func addonFileTbl(l *lua.State, rw bool) {
 				file.Name = l.ToString(3)
 			case "Source":
 				file.Source = l.ToString(3)
-			// Cant set Tags
+				// Cant set Tags
 			}
 			return 0
 		})
@@ -694,7 +694,7 @@ func rubbleStateActiveTbl(l *lua.State) {
 	l.Push("__index")
 	l.Push(func(l *lua.State) int {
 		state := getState(l)
-		
+
 		val, ok := state.Active[l.ToString(2)]
 		if ok {
 			l.Push(val)
@@ -707,7 +707,7 @@ func rubbleStateActiveTbl(l *lua.State) {
 	l.Push("__pairs")
 	l.Push(func(l *lua.State) int {
 		state := getState(l)
-		
+
 		il := make([]string, 0, len(state.Active))
 		for i := range state.Active {
 			il = append(il, i)

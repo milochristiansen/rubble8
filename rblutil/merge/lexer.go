@@ -1,5 +1,5 @@
 /*
-Copyright 2015-2016 by Milo Christiansen
+Copyright 2015-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -55,7 +55,7 @@ var delimiters = "|:(){},\n#"
 type token struct {
 	Lexeme string
 	Type   int
-	Line int
+	Line   int
 }
 
 type lexer struct {

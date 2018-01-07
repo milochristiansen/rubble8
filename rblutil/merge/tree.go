@@ -1,5 +1,5 @@
 /*
-Copyright 2014-2016 by Milo Christiansen
+Copyright 2014-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -22,7 +22,7 @@ misrepresented as being the original software.
 
 package merge
 
-import "rubble8/rblutil/rparse"
+import "github.com/milochristiansen/rubble8/rblutil/rparse"
 
 // TagTree is a node in a tree that represents the relations tags have to each
 // other as defined by the rules used to create the tree.
@@ -41,18 +41,18 @@ func (tt *TagTree) String() string {
 func (tt *TagTree) str(prefix string) string {
 	out := ""
 	if tt.Me != nil {
-		out = prefix+tt.Me.String()+"\n"
+		out = prefix + tt.Me.String() + "\n"
 	}
-	
+
 	for _, child := range tt.Children {
-		out += child.str(prefix+"\t")
+		out += child.str(prefix + "\t")
 	}
 	return out
 }
 
 func addToTree(parent *TagTree, tag *rparse.Tag) *TagTree {
 	ntn := &TagTree{
-		Me: tag,
+		Me:     tag,
 		Parent: parent,
 	}
 	parent.Children = append(parent.Children, ntn)
@@ -67,14 +67,14 @@ func TreeifyRaws(tags []*rparse.Tag, rules *RuleNode) *TagTree {
 
 	roottag := new(TagTree)
 	tagnode := roottag
-	
+
 nexttag:
 	for _, t := range tags {
 		if t.CommentsOnly {
 			continue
 		}
 		t.Comments = "" // Zap the comments to keep things neat.
-		
+
 		// Try to get a match from the current rule's children
 		nnode, _ := node.Match(t)
 		if nnode != nil {
@@ -82,7 +82,7 @@ nexttag:
 			tagnode = addToTree(tagnode, t)
 			continue
 		}
-		
+
 		// No match, scan up the tree to see if it is a higher level tag.
 		n := node
 		tn := tagnode
@@ -96,7 +96,7 @@ nexttag:
 				continue nexttag
 			}
 		}
-		
+
 		// Ignore any unmatched tags
 	}
 	return roottag

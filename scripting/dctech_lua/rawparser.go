@@ -1,5 +1,5 @@
 /*
-Copyright 2015-2016 by Milo Christiansen
+Copyright 2015-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -23,8 +23,8 @@ misrepresented as being the original software.
 package lua
 
 import "github.com/milochristiansen/lua"
-import "rubble8/rblutil/rparse"
-import "rubble8/rblutil/merge"
+import "github.com/milochristiansen/rubble8/rblutil/rparse"
+import "github.com/milochristiansen/rubble8/rblutil/merge"
 
 import "bytes"
 
@@ -50,11 +50,11 @@ var rparseLibrary = map[string]lua.NativeFunction{
 	},
 	"format": func(l *lua.State) int {
 		out := new(bytes.Buffer)
-		
+
 		l.ForEachInTable(1, func() {
 			l.ToUser(-1).(*rparse.Tag).Format(out)
 		})
-		
+
 		l.Push(out.String())
 		return 1
 	},
@@ -67,9 +67,9 @@ var rparseLibrary = map[string]lua.NativeFunction{
 	"maketree": func(l *lua.State) int {
 		rtree := new(merge.RuleNode)
 		merge.ParseRules([]byte(l.ToString(2)), rtree)
-	
+
 		tree := merge.TreeifyRaws(rparse.ParseRaws([]byte(l.ToString(1))), rtree)
-		
+
 		// Now for the tricky part, turning the tree into a set of nested tables.
 		// OK, so it's not actually tricky after all...
 		l.Push(nil)
@@ -92,7 +92,7 @@ func makeTagTreeTable(l *lua.State, tree *merge.TagTree) {
 	}
 	for i, child := range tree.Children {
 		makeTagTreeTable(l, child)
-		l.Push(i+1)
+		l.Push(i + 1)
 		l.Insert(-1)
 		l.SetTableRaw(-3)
 	}
@@ -140,7 +140,7 @@ func rparseTagTbl(l *lua.State) {
 			return 0
 		case "Params":
 			tag.Params = make([]string, 0, l.Length(3))
-			
+
 			l.ForEachInTable(3, func() {
 				tag.Params = append(tag.Params, l.ToString(-1))
 			})
@@ -158,7 +158,7 @@ func rparseTagTbl(l *lua.State) {
 		return 0
 	})
 	l.SetTableRaw(tidx)
-	
+
 	l.Push("__tostring")
 	l.Push(func(l *lua.State) int {
 		tag := l.ToUser(1).(*rparse.Tag)

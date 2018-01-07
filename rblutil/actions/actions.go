@@ -1,5 +1,5 @@
 /*
-Copyright 2016 by Milo Christiansen
+Copyright 2016-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -23,7 +23,7 @@ misrepresented as being the original software.
 // The actions registry for the universal interface.
 package actions
 
-import "rubble8/rblutil"
+import "github.com/milochristiansen/rubble8/rblutil"
 
 import "flag"
 import "os"
@@ -36,11 +36,11 @@ import "regexp"
 type Option struct {
 	Name string
 	Help string
-	
+
 	DS string // Default for string flags
-	DB bool // Default for bool flags.
+	DB bool   // Default for bool flags.
 	// []string flags have no defaults.
-	
+
 	// If true the result is a *bool, otherwise the result is a *string (or a *rblutil.ArgList (*[]string) if Multiple is true).
 	Flag     bool
 	Multiple bool // Ignored if Flag is true.
@@ -67,11 +67,11 @@ func makeFlags(mode string, rblini map[string][]string, log rblutil.Logger, hide
 	if !ok {
 		return nil, nil, nil
 	}
-	
+
 	f := flag.NewFlagSet(mode, flag.ExitOnError)
 	options := make([]interface{}, len(def))
 	f.SetOutput(log)
-	
+
 	for i, opt := range def {
 		iniv, ok := rblini[opt.Name]
 		if ok && len(iniv) == 0 {
@@ -102,7 +102,7 @@ func makeFlags(mode string, rblini map[string][]string, log rblutil.Logger, hide
 		}
 		options[i] = f.String(opt.Name, d, opt.Help)
 	}
-	
+
 	common := make([]interface{}, 0, 4)
 	if !hidecommon {
 		// Add the common options
@@ -120,11 +120,11 @@ func makeFlags(mode string, rblini map[string][]string, log rblutil.Logger, hide
 		}
 		common = append(common, commonOpt(f, rblini, "dfver", "", "If you are seeing this it's an error!"))
 	}
-	
+
 	f.Usage = func() {
 		log.Println("Run \"rubble help\" for usage.")
 	}
-	
+
 	return f, options, common
 }
 
@@ -208,15 +208,15 @@ func Exec(mode string, args []string, log rblutil.Logger, rblini map[string][]st
 		log.Println("\nFor options common to all modes run \"rubble help\"")
 		os.Exit(0)
 	}
-	
+
 	f, options, common := makeFlags(mode, rblini, log, false)
 	if f == nil {
 		log.Println("Unknown mode, valid modes are: help, " + modes)
 		os.Exit(3)
 	}
-	
+
 	f.Parse(args) // os.Exit(2) on error
-	
+
 	rblDir := *common[0].(*string)
 	dfDir := *common[1].(*string)
 	outDir := *common[2].(*string)
@@ -225,11 +225,11 @@ func Exec(mode string, args []string, log rblutil.Logger, rblini map[string][]st
 	if addonDirs.Empty() {
 		addonDirs.Set("rubble/addons")
 	}
-	
+
 	verok := false
 	verman := false
 	verauto := false
-	
+
 	verparts := strings.Split(dfver, ".")
 	if len(verparts) == 2 {
 		M, erra := strconv.Atoi(verparts[0])
@@ -246,13 +246,13 @@ func Exec(mode string, args []string, log rblutil.Logger, rblini map[string][]st
 		log.Println("-dfver option has invalid format. Must have exactly two parts separated by a period like so: \"34.11\"")
 		os.Exit(3)
 	}
-	
+
 	// If we could do file IO at this point it would be possible to try to guess the DF version by reading
 	// "df/release notes.txt" and looking for the first occurrence of "Release notes for 0.x.x"
 	// Sadly AXIS is not available yet.
-	
+
 	// You know what? Screw it. We'll use traditional file IO.
-	content, err := ioutil.ReadFile(rblutil.ReplacePrefix(dfDir, "rubble", rblDir)+"/release notes.txt")
+	content, err := ioutil.ReadFile(rblutil.ReplacePrefix(dfDir, "rubble", rblDir) + "/release notes.txt")
 	if err == nil {
 		parts := regexp.MustCompile(`Release notes for 0.([0-9]+).([0-9]+)`).FindSubmatch(content)
 		M, erra := strconv.Atoi(string(parts[1]))
@@ -267,7 +267,7 @@ func Exec(mode string, args []string, log rblutil.Logger, rblini map[string][]st
 			}
 		}
 	}
-	
+
 	log.Printf("  Current DF version: 0.%v.%v\n", rblutil.DFVMajor, rblutil.DFVMinor)
 	switch {
 	case verman && verok:
@@ -295,9 +295,9 @@ func Exec(mode string, args []string, log rblutil.Logger, rblini map[string][]st
 		log.Println("    If the stated version is not correct restart Rubble with")
 		log.Println("    the -dfver option or by setting the dfver key in rubble.ini")
 	}
-	
+
 	log.Println("  Calling action for mode:", mode)
-	
+
 	action := actions[mode]
 	ok := action.Run(log, rblDir, dfDir, outDir, *addonDirs, options)
 	if !ok {
@@ -323,4 +323,3 @@ type Action interface {
 	// Most of the other arguments are set from the "common options" all actions support.
 	Run(log rblutil.Logger, rblDir, dfDir, outDir string, addonDirs []string, options []interface{}) bool
 }
-

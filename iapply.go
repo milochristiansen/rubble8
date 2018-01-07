@@ -1,5 +1,5 @@
 /*
-Copyright 2013-2016 by Milo Christiansen
+Copyright 2013-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -22,9 +22,9 @@ misrepresented as being the original software.
 
 package rubble8
 
-import "rubble8/rblutil"
-import "rubble8/rblutil/errors"
-import "rubble8/rblutil/addon"
+import "github.com/milochristiansen/rubble8/rblutil"
+import "github.com/milochristiansen/rubble8/rblutil/errors"
+import "github.com/milochristiansen/rubble8/rblutil/addon"
 
 import "github.com/milochristiansen/axis2"
 import "github.com/milochristiansen/axis2/sources"
@@ -39,18 +39,18 @@ func IAModeRun(region, dfdir string, addons []string, data *addon.Database, fs *
 	} else {
 		output += "/data/save/" + region + "/raw"
 	}
-	
+
 	rblutil.LogSeparator(log)
 	log.Println("Entering Independent Application Mode for Region:", region)
-	
+
 	defer errors.TrapError(&err, log)
-	
+
 	old := fs.SwapMount("out", sources.NewOSDir(output), true)
 	if old == nil {
 		errors.RaiseError("Could not remount the \"out\" mount point")
 	}
 	defer fs.SwapMount("out", old, true)
-	
+
 	oops, state := NewState(data, fs, log)
 	if oops != nil {
 		return oops
@@ -114,8 +114,8 @@ func IAModeRun(region, dfdir string, addons []string, data *addon.Database, fs *
 	state.Log.Println("Writing Files...")
 	for _, writer := range state.Addons.Writers {
 		if writer.AllowIA {
-			state.Log.Println("  Writing "+writer.Desc+"...")
-			err =  state.writeFiles(state.Files, writer.Dir, writer.Filter, writer.Comment, writer.ExtHas, writer.ExtGive, writer.AddHeader)
+			state.Log.Println("  Writing " + writer.Desc + "...")
+			err = state.writeFiles(state.Files, writer.Dir, writer.Filter, writer.Comment, writer.ExtHas, writer.ExtGive, writer.AddHeader)
 			if err != nil {
 				return err
 			}
@@ -126,15 +126,15 @@ func IAModeRun(region, dfdir string, addons []string, data *addon.Database, fs *
 	for id, reqs := range state.Banks {
 		source, ok := state.Addons.Banks[id]
 		if !ok {
-			state.Log.Println("    Request(s) to write nonexistent bank: \""+id+"\" Skipping.")
+			state.Log.Println("    Request(s) to write nonexistent bank: \"" + id + "\" Skipping.")
 			continue
 		}
 		for _, req := range reqs {
-			state.Log.Println("    \""+id+"\" To: \""+req.To+"\"")
+			state.Log.Println("    \"" + id + "\" To: \"" + req.To + "\"")
 			state.copyBank(source, req.To, "", req.Black, req.White)
 		}
 	}
-	
+
 	state.Log.Println("  Writing Init Files...")
 	state.Log.Println("    init.txt")
 	err = state.FS.WriteAll("df/data/init/init.txt", state.Init)

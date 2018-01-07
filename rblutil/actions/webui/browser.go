@@ -1,7 +1,7 @@
 // +build !windows
 
 /*
-Copyright 2015-2016 by Milo Christiansen
+Copyright 2015-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -24,7 +24,7 @@ misrepresented as being the original software.
 
 package webui
 
-import "rubble8/rblutil"
+import "github.com/milochristiansen/rubble8/rblutil"
 
 import "os/exec"
 

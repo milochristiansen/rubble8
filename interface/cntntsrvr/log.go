@@ -1,5 +1,5 @@
 /*
-Copyright 2013-2016 by Milo Christiansen
+Copyright 2013-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -28,16 +28,16 @@ import "os"
 import "io"
 import "sync"
 
-import "rubble8"
-import "rubble8/rblutil"
+import "github.com/milochristiansen/rubble8"
+import "github.com/milochristiansen/rubble8/rblutil"
 
 // serverLogger writes to rubble.log and os.Stdout.
 type serverLogger struct {
 	file *os.File
-	
+
 	bc     int
 	prefix string
-	
+
 	lock *sync.Mutex
 }
 
@@ -47,23 +47,23 @@ func newLogger(name string) (error, rblutil.Logger) {
 		return err, nil
 	}
 
-	log := &serverLogger {
+	log := &serverLogger{
 		file: file,
 		lock: new(sync.Mutex),
 	}
-	
+
 	// Not useful. The log is never deleted before the program exits.
 	//runtime.SetFinalizer(log, func(log *serverLogger){
 	//	log.file.Close()
 	//})
-	
+
 	return nil, log
 }
 
 func (log *serverLogger) Write(p []byte) (n int, err error) {
 	log.lock.Lock()
 	defer log.lock.Unlock()
-	
+
 	if log.bc > 1024*1024 {
 		file, err := os.Create(fmt.Sprintf("./"+log.prefix+" %v.log", time.Now().UTC().Format("06-01-02 15.04.05")))
 		if err != nil {
@@ -73,9 +73,9 @@ func (log *serverLogger) Write(p []byte) (n int, err error) {
 		log.bc = 0
 		log.file = file
 	}
-	
+
 	log.bc += len(p)
-	
+
 	n, err = log.file.Write(p)
 	if err != nil {
 		return
@@ -84,7 +84,7 @@ func (log *serverLogger) Write(p []byte) (n int, err error) {
 		err = io.ErrShortWrite
 		return
 	}
-	
+
 	n, err = os.Stdout.Write(p)
 	if err != nil {
 		return
@@ -93,7 +93,7 @@ func (log *serverLogger) Write(p []byte) (n int, err error) {
 		err = io.ErrShortWrite
 		return
 	}
-	
+
 	return len(p), nil
 }
 
@@ -158,7 +158,7 @@ func (log *serverLogger) WarnOnlyExtra(msg ...interface{}) {
 }
 
 func (log *serverLogger) ClearWarnings() {
-	
+
 }
 
 func (log *serverLogger) WarnCount() int {

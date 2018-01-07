@@ -1,5 +1,5 @@
 /*
-Copyright 2016 by Milo Christiansen
+Copyright 2016-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -24,7 +24,7 @@ package rubble8
 
 import "strconv"
 
-import "rubble8/rblutil"
+import "github.com/milochristiansen/rubble8/rblutil"
 
 // To set the VExtra field while compiling do the following:
 //	set "VERSION_TAG=<your tag string>"
@@ -40,7 +40,7 @@ import "rubble8/rblutil"
 var DFVMajor, DFVMinor = 44, 3
 
 // This is the current Rubble version.
-var VMajor, VMinor, VPatch = 8, 5, 3
+var VMajor, VMinor, VPatch = 8, 5, 4
 
 // Experimental, beta, and other special versions may specify an extra ID to add to the standard version string.
 // This will automatically be set to one of several values based on satisfied (or unsatisfied) build constraints.

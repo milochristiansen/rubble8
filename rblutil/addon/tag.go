@@ -1,5 +1,5 @@
 /*
-Copyright 2015-2016 by Milo Christiansen
+Copyright 2015-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -22,7 +22,7 @@ misrepresented as being the original software.
 
 package addon
 
-import "rubble8/rblutil"
+import "github.com/milochristiansen/rubble8/rblutil"
 
 // See addons/world.meta for global tags
 
@@ -34,18 +34,26 @@ var DefaultLast = map[string][]string{}
 // The returned slice of tags is yours to keep.
 func GetFileTags(fa, la, fb, lb map[string][]string, name string) []string {
 	f, l := rblutil.GetExtParts(name)
-	
+
 	var fav, lav, fbv, lbv []string
-	if fa != nil { fav = fa[f] }
-	if la != nil { lav = la[l] }
-	if fb != nil { fbv = fb[f] }
-	if lb != nil { lbv = lb[l] }
-	
+	if fa != nil {
+		fav = fa[f]
+	}
+	if la != nil {
+		lav = la[l]
+	}
+	if fb != nil {
+		fbv = fb[f]
+	}
+	if lb != nil {
+		lbv = lb[l]
+	}
+
 	rtn := make([]string, 0, len(fav)+len(lav)+len(fbv)+len(lbv))
 	rtn = append(rtn, fav...)
 	rtn = append(rtn, lav...)
 	rtn = append(rtn, fbv...)
 	rtn = append(rtn, lbv...)
-	
+
 	return rtn
 }

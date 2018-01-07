@@ -1,5 +1,5 @@
 /*
-Copyright 2015-2016 by Milo Christiansen
+Copyright 2015-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -22,8 +22,8 @@ misrepresented as being the original software.
 
 package rubble8
 
-import "rubble8/rblutil/addon"
-import "rubble8/rblutil/errors"
+import "github.com/milochristiansen/rubble8/rblutil/addon"
+import "github.com/milochristiansen/rubble8/rblutil/errors"
 
 var InvalidScriptLangError = &errors.Error{Msg: "No script runner registered for the requested language."}
 
@@ -35,10 +35,11 @@ type Runner interface {
 	Run(script []byte, tag string, name string, line int, args []string) (string, error)
 }
 
-type sRM struct{
+type sRM struct {
 	f func(*State) Runner
 	t []string
 }
+
 var scriptrunners []sRM
 
 // AddDefaultRunner adds a Runner to the list of Runners that will be available to any new Core created with NewCore.

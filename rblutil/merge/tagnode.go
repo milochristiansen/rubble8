@@ -1,5 +1,5 @@
 /*
-Copyright 2014-2016 by Milo Christiansen
+Copyright 2014-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -22,7 +22,7 @@ misrepresented as being the original software.
 
 package merge
 
-import "rubble8/rblutil/rparse"
+import "github.com/milochristiansen/rubble8/rblutil/rparse"
 
 // TagNode is a group of raw tags matched to rules to be used in constructing a raw tree.
 type TagNode struct {
@@ -116,7 +116,7 @@ func (node *TagNode) addTag(tag *rparse.Tag, rule []Rule) *TagNode {
 		node.Tags[ni] = tag
 		return node.Children[ni]
 	}
-	
+
 	// If we don't then create a new tag.
 	nnode = new(TagNode)
 	nnode.Parent = node

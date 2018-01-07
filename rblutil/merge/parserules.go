@@ -1,5 +1,5 @@
 /*
-Copyright 2014-2016 by Milo Christiansen
+Copyright 2014-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -150,8 +150,8 @@ func parseMatchRule(lex *lexer, trees []*RuleNode, blocks map[string]*RuleNode) 
 			lex.getToken(tknItem)
 			rules = append(rules, Rule{
 				Items: []string{lex.current.Lexeme},
-				Min:  1,
-				Max:  1,
+				Min:   1,
+				Max:   1,
 			})
 		case tknBlockOpen:
 			lex.getToken(tknBlockOpen)
@@ -162,8 +162,8 @@ func parseMatchRule(lex *lexer, trees []*RuleNode, blocks map[string]*RuleNode) 
 			}
 			rules = append(rules, Rule{
 				Items: items,
-				Min:  1,
-				Max:  1,
+				Min:   1,
+				Max:   1,
 			})
 			lex.getToken(tknBlockClose)
 		default:

@@ -22,10 +22,10 @@ misrepresented as being the original software.
 
 package addon
 
-import "rubble8/rblutil"
-import "rubble8/rblutil/errors"
-import "rubble8/rblutil/login"
-import "rubble8/rblutil/dffd"
+import "github.com/milochristiansen/rubble8/rblutil"
+import "github.com/milochristiansen/rubble8/rblutil/errors"
+import "github.com/milochristiansen/rubble8/rblutil/login"
+import "github.com/milochristiansen/rubble8/rblutil/dffd"
 
 import "github.com/milochristiansen/axis2"
 import "github.com/milochristiansen/axis2/sources/zip"
@@ -43,23 +43,23 @@ import "time"
 // PackBase is used by the content server to store it's addon pack information and sync it for concurrent access.
 type PackBase struct {
 	sync.RWMutex
-	
-	data map[string]*[]*PackMeta
+
+	data  map[string]*[]*PackMeta
 	locks map[string]*sync.RWMutex
 }
 
 func NewPackBase(fs *axis2.FileSystem) (*PackBase, error) {
 	packs := &PackBase{
-		data: map[string]*[]*PackMeta{},
+		data:  map[string]*[]*PackMeta{},
 		locks: map[string]*sync.RWMutex{},
 	}
-	
+
 	for _, filename := range fs.ListFiles("addons") {
 		if strings.HasSuffix(filename, ".json") {
 			name := rblutil.StripExt(filename)
-			
+
 			data := &[]*PackMeta{}
-			content, err := fs.ReadAll("addons/"+filename)
+			content, err := fs.ReadAll("addons/" + filename)
 			if err != nil {
 				return nil, err
 			}
@@ -67,12 +67,12 @@ func NewPackBase(fs *axis2.FileSystem) (*PackBase, error) {
 			if err != nil {
 				return nil, err
 			}
-			
+
 			packs.data[name] = data
 			packs.locks[name] = new(sync.RWMutex)
 		}
 	}
-	
+
 	return packs, nil
 }
 
@@ -80,7 +80,7 @@ func NewPackBase(fs *axis2.FileSystem) (*PackBase, error) {
 func (packs *PackBase) List(ver *HostVersions) map[string]*PackMeta {
 	packs.RLock()
 	defer packs.RUnlock()
-	
+
 	rtn := map[string]*PackMeta{}
 	for pack := range packs.data {
 		meta := packs.LookUp(pack, ver)
@@ -102,13 +102,13 @@ func (packs *PackBase) LookUp(id string, ver *HostVersions) *PackMeta {
 	lock := packs.locks[id]
 	lock.RLock()
 	defer lock.RUnlock()
-	
+
 	idx := -1
 	for i, pack := range *packv {
 		if !pack.MatchVersions(ver) {
 			continue
 		}
-		
+
 		if idx != -1 {
 			last := (*packv)[idx]
 			if pack.VerMajor == last.VerMajor {
@@ -123,7 +123,7 @@ func (packs *PackBase) LookUp(id string, ver *HostVersions) *PackMeta {
 				continue
 			}
 		}
-		
+
 		idx = i
 	}
 	if idx != -1 {
@@ -136,13 +136,13 @@ func (packs *PackBase) LookUp(id string, ver *HostVersions) *PackMeta {
 func (packs *PackBase) Add(id, ver string, meta *PackMeta, fs *axis2.FileSystem) error {
 	packs.Lock()
 	defer packs.Unlock()
-	
+
 	packv, ok := packs.data[id]
 	if ok {
 		lock := packs.locks[id]
 		lock.Lock()
 		defer lock.Unlock()
-		
+
 		idx := -1
 		for i, pack := range *packv {
 			if (pack.DFFDID != -1 && pack.DFFDID == meta.DFFDID) || pack.URL == meta.URL || (ver != "" && pack.VersionStr == ver) {
@@ -150,7 +150,7 @@ func (packs *PackBase) Add(id, ver string, meta *PackMeta, fs *axis2.FileSystem)
 				break
 			}
 		}
-		
+
 		if idx == -1 {
 			idx = len(*packv)
 			*packv = append(*packv, meta)
@@ -165,7 +165,7 @@ func (packs *PackBase) Add(id, ver string, meta *PackMeta, fs *axis2.FileSystem)
 		packs.data[id] = packv
 		packs.locks[id] = new(sync.RWMutex)
 	}
-	
+
 	out, err := json.Marshal(packv)
 	if err != nil {
 		return err
@@ -179,40 +179,40 @@ func (packs *PackBase) AddFromDFFD(id, ver string, dffdid int64, user string, fs
 	if err != nil {
 		return err
 	}
-	
+
 	return packs.AddFromUrl(id, ver, info.URL(), user, fs)
 }
 
 // AddFromUrl downloads the given item, then reads the pack.meta file from the downloaded pack and uses the result to call Add.
 func (packs *PackBase) AddFromUrl(id, ver, url, user string, fs *axis2.FileSystem) (err error) {
 	defer errors.TrapError(&err, nil) // loadPackMeta may panic
-	
+
 	client := new(http.Client)
 	r, err := client.Get(url)
 	if err != nil {
 		return err
 	}
-	
+
 	content, err := ioutil.ReadAll(r.Body)
 	r.Body.Close()
 	if err != nil {
 		return err
 	}
-	
+
 	nds, err := zip.NewRawDir(content)
 	if err != nil {
 		return err
 	}
-	
+
 	fs.Mount("loader/pack", nds, false)
 	meta := loadPackMeta(fs, "loader/pack")
 	fs.Unmount("loader/pack", true)
-	
+
 	meta.URL = url
 	meta.Owner = user
 	sum := md5.Sum(content)
 	meta.MD5 = &sum
-	
+
 	return packs.Add(id, ver, meta, fs)
 }
 
@@ -220,25 +220,25 @@ func (packs *PackBase) AddFromUrl(id, ver, url, user string, fs *axis2.FileSyste
 func (packs *PackBase) Remove(id, ver string, fs *axis2.FileSystem) error {
 	packs.Lock()
 	defer packs.Unlock()
-	
+
 	packv, ok := packs.data[id]
 	if ok {
 		lock := packs.locks[id]
 		lock.Lock()
 		defer lock.Unlock()
-		
+
 		for i, pack := range *packv {
 			if pack.VersionStr == ver {
 				copy((*packv)[i:], (*packv)[i+1:])
 				*packv = (*packv)[:len(*packv)-1]
-				
+
 				if len(*packv) == 0 {
 					delete(packs.data, id)
 					delete(packs.locks, id)
-					return fs.Delete("addons/"+id+".json")
+					return fs.Delete("addons/" + id + ".json")
 				}
 				packs.data[id] = packv
-				
+
 				out, err := json.Marshal(packv)
 				if err != nil {
 					return err
@@ -253,22 +253,22 @@ func (packs *PackBase) Remove(id, ver string, fs *axis2.FileSystem) error {
 // SrvrRequest is the structure used to hold information for content server requests.
 type SrvrRequest struct {
 	Action string
-	
+
 	// Pack ID. Needed for all actions except adding a new user.
-	PackID  string
-	
+	PackID string
+
 	// Version to delete when deleting, or version to replace when uploading.
 	PackVer string
-	
+
 	// The URL of the pack to upload when uploading. The other information the server needs
 	// is then read from the pack's pack.meta file.
 	PackURL string
-	
+
 	// Client version numbers.
 	HostVer *HostVersions
-	
+
 	// User name and token for uploading or adding a new user.
-	User string
+	User  string
 	Token *[1024]byte
 }
 
@@ -278,13 +278,13 @@ func ReadRequest(conn net.Conn) (*SrvrRequest, error) {
 	if err != nil {
 		return nil, err
 	}
-	
+
 	rbody := make([]byte, rlen)
 	_, err = conn.Read(rbody)
 	if err != nil {
 		return nil, err
 	}
-	
+
 	rtn := &SrvrRequest{}
 	err = json.Unmarshal(rbody, rtn)
 	if err != nil {
@@ -298,7 +298,7 @@ func (req *SrvrRequest) SendRequest(conn net.Conn) {
 	if err != nil {
 		panic(err) // <- Should be impossible, but better to crash and burn then continue oblivious...
 	}
-	
+
 	binary.Write(conn, binary.BigEndian, int64(len(out)))
 	conn.Write(out)
 }
@@ -306,7 +306,7 @@ func (req *SrvrRequest) SendRequest(conn net.Conn) {
 // LookupContentServerPack attempts to connect to the content server at the given address and
 // lookup the requested addon pack. Any failure simply causes nil to be returned. This is for
 // use in cases where failure is half expected (such as in the addon loader).
-// 
+//
 // Not suitable for interactive use.
 func LookupContentServerPack(addr, name string) *PackMeta {
 	rcode, rtn, err := ContactContentServer(addr, "Info", name, "", "", "", nil)
@@ -321,9 +321,9 @@ var invalidAction = &errors.Error{Msg: "Invalid content server action."}
 
 // ContactContentServer is a generic function that wrap the entire process of querying a content server.
 // Some arguments are only required for certain actions.
-// 
+//
 // A nil error does not always mean success! Check the server response code as well!
-// 
+//
 // Unless you know what you are doing do not use this function!
 func ContactContentServer(addr, action, pack, ver, url, user string, token *[1024]byte) (string, interface{}, error) {
 	switch action {
@@ -348,33 +348,33 @@ func ContactContentServer(addr, action, pack, ver, url, user string, token *[102
 	default:
 		return "", nil, invalidAction
 	}
-	
+
 	conn, err := net.Dial("tcp", addr)
 	if err != nil {
 		return "", nil, err
 	}
 	defer conn.Close()
-	
+
 	(&SrvrRequest{
 		Action: action,
-		
-		PackID: pack,
+
+		PackID:  pack,
 		PackVer: ver,
 		PackURL: url,
-		
+
 		HostVer: &HostVersions{
 			DFMajor: rblutil.DFVMajor,
 			DFPatch: rblutil.DFVMinor,
-			
+
 			RblRewrite: rblutil.VMajor,
-			RblMajor: rblutil.VMinor,
-			RblPatch: rblutil.VPatch,
+			RblMajor:   rblutil.VMinor,
+			RblPatch:   rblutil.VPatch,
 		},
-		
-		User: user,
+
+		User:  user,
 		Token: token,
 	}).SendRequest(conn)
-	
+
 	var rlen byte
 	err = binary.Read(conn, binary.BigEndian, &rlen)
 	if err != nil {
@@ -385,11 +385,11 @@ func ContactContentServer(addr, action, pack, ver, url, user string, token *[102
 	if err != nil {
 		return "", nil, err
 	}
-	
+
 	if string(rcode) != "OK" {
 		return string(rcode), nil, nil
 	}
-	
+
 	if action == "Info" || action == "List" {
 		var rlen int64
 		err = binary.Read(conn, binary.BigEndian, &rlen)
@@ -424,7 +424,7 @@ func ContactContentServer(addr, action, pack, ver, url, user string, token *[102
 // The connection is closed before return.
 func (packs *PackBase) ServeConn(log rblutil.Logger, fs *axis2.FileSystem, conn net.Conn) {
 	defer conn.Close()
-	
+
 	// Read Request
 	req, err := ReadRequest(conn)
 	if err != nil {
@@ -432,28 +432,28 @@ func (packs *PackBase) ServeConn(log rblutil.Logger, fs *axis2.FileSystem, conn 
 		conn.Write(errCommandReadFailed)
 		return
 	}
-	
+
 	// Handle actions that do not require a valid user here.
 	if req.Action == "AddUser" {
-		if fs.Exists("rubble/users/"+req.User+".tkn") {
+		if fs.Exists("rubble/users/" + req.User + ".tkn") {
 			loggit(log, req, "Failed: User already exists.")
 			conn.Write(errUserExists)
 			return
 		}
-		
+
 		if req.Token == nil {
 			loggit(log, req, "Failed: No token provided.")
 			conn.Write(errCommandFailed)
 			return
 		}
-		
+
 		err := fs.WriteAll("rubble/users/"+req.User+".tkn", (*req.Token)[:])
 		if err != nil {
 			loggit(log, req, "Failed: "+err.Error())
 			conn.Write(errCommandFailed)
 			return
 		}
-		
+
 		loggit(log, req, "OK!")
 		conn.Write(rOK)
 		return
@@ -465,7 +465,7 @@ func (packs *PackBase) ServeConn(log rblutil.Logger, fs *axis2.FileSystem, conn 
 			conn.Write(errNoMatchingPack)
 			return
 		}
-		
+
 		conn.Write(rOK)
 		out, err := json.Marshal(meta)
 		if err != nil {
@@ -485,7 +485,7 @@ func (packs *PackBase) ServeConn(log rblutil.Logger, fs *axis2.FileSystem, conn 
 			conn.Write(errCommandFailed)
 			return
 		}
-		
+
 		conn.Write(rOK)
 		out, err := json.Marshal(list)
 		if err != nil {
@@ -498,13 +498,13 @@ func (packs *PackBase) ServeConn(log rblutil.Logger, fs *axis2.FileSystem, conn 
 		loggit(log, req, "OK!")
 		return
 	}
-	
+
 	if !login.Validate(req.User, req.Token, fs) {
 		loggit(log, req, "Failed: Invalid user name or token.")
 		conn.Write(errInvalidUser)
 		return
 	}
-	
+
 	if req.Action == "Upload" {
 		err := packs.AddFromUrl(req.PackID, req.PackVer, req.PackURL, req.User, fs)
 		if err != nil {
@@ -512,7 +512,7 @@ func (packs *PackBase) ServeConn(log rblutil.Logger, fs *axis2.FileSystem, conn 
 			conn.Write(errCommandFailed)
 			return
 		}
-		
+
 		loggit(log, req, "OK!")
 		conn.Write(rOK)
 		return

@@ -1,5 +1,5 @@
 /*
-Copyright 2013-2016 by Milo Christiansen
+Copyright 2013-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -21,10 +21,10 @@ misrepresented as being the original software.
 */
 
 // Rubble Utility Package.
-// 
+//
 // RblUtil is a place to put small data structures and functions that are
 // commonly used by various parts of Rubble (the core, interfaces, the encoder, etc.).
-// 
+//
 // This package does not import any other part of Rubble, making it safe to use anywhere
 // without worrying about circular imports.
 package rblutil

@@ -1,5 +1,5 @@
 /*
-Copyright 2013-2016 by Milo Christiansen
+Copyright 2013-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -34,19 +34,19 @@ func EnsureToken(name string, fs *axis2.FileSystem) error {
 	if fs.Exists("rubble/users/"+name+".tkn") && fs.Size("rubble/users/"+name+".tkn") == 1024 {
 		return nil
 	}
-	
+
 	rng := rand.New(rand.NewSource(time.Now().UnixNano()))
 	token := make([]byte, 1024)
 	rng.Read(token) // Docs say returns no error
-	
+
 	return fs.WriteAll("rubble/users/"+name+".tkn", token)
 }
 
 func Validate(name string, token *[1024]byte, fs *axis2.FileSystem) bool {
-	if !fs.Exists("rubble/users/"+name+".tkn") {
+	if !fs.Exists("rubble/users/" + name + ".tkn") {
 		return false
 	}
-	
+
 	ltkn := GetToken(name, fs)
 	if ltkn == nil {
 		return false
@@ -55,21 +55,21 @@ func Validate(name string, token *[1024]byte, fs *axis2.FileSystem) bool {
 }
 
 func GetToken(name string, fs *axis2.FileSystem) *[1024]byte {
-	if !fs.Exists("rubble/users/"+name+".tkn") {
+	if !fs.Exists("rubble/users/" + name + ".tkn") {
 		return nil
 	}
-	
-	rdr, err := fs.Read("rubble/users/"+name+".tkn")
+
+	rdr, err := fs.Read("rubble/users/" + name + ".tkn")
 	if err != nil {
 		return nil
 	}
 	defer rdr.Close()
-	
+
 	ltkn := new([1024]byte)
 	err = binary.Read(rdr, binary.BigEndian, ltkn)
 	if err != nil {
 		return nil
 	}
-	
+
 	return ltkn
 }

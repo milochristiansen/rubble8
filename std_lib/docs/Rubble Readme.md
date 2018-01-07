@@ -254,12 +254,10 @@ silently, which is worse).
 There are also some extra tools that may be useful, run `rubble help` for a full list of all
 the modes that are currently installed.
 
-BUGS (and other issues):
+Reporting Errors:
 ----------------------------------------------------------------------------------------------------
 
-Bugs:
-
-* None Known.
+Please report issues [on github](https://github.com/milochristiansen/rubble8/issues).
 
 When making an error report please post the **full** log file! Posting just a few lines tells me almost
 nothing about the problem, after all I made Rubble write all that stuff for a reason :)
@@ -280,8 +278,6 @@ email address is:
 
 	milo.christiansen (at) gmail (dot) com
 
-Please wait 1-4 weeks before giving up hope, as my Internet access is VERY irregular (and I check my
-email less often then I check the forums).
 
 [RB]: /doc/Rubble%20Basics.md
 [RB1]: /doc/Rubble%20Basics.md#AXIS

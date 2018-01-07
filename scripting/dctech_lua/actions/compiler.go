@@ -1,5 +1,5 @@
 /*
-Copyright 2015-2016 by Milo Christiansen
+Copyright 2015-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -25,9 +25,9 @@ package actions
 
 import "github.com/milochristiansen/lua"
 
-import "rubble8"
-import "rubble8/rblutil"
-import "rubble8/rblutil/actions"
+import "github.com/milochristiansen/rubble8"
+import "github.com/milochristiansen/rubble8/rblutil"
+import "github.com/milochristiansen/rubble8/rblutil/actions"
 
 import "bytes"
 
@@ -35,48 +35,48 @@ func init() {
 	// This enables a compile script action for the universal interface.
 	actions.RegisterFunc("luac", func(log rblutil.Logger, rblDir, dfDir, outDir string, addonDirs []string, options []interface{}) bool {
 		inFile, outFile := *options[0].(*string), *options[1].(*string)
-		
+
 		log.Println("Compiling Script:", inFile)
 		log.Println("  Initializing AXIS VFS...")
 		fs := rubble8.InitAXIS(rblDir, dfDir, outDir, addonDirs)
-		
+
 		log.Println("  Loading Script File...")
 		script, err := fs.ReadAll(inFile)
 		if err != nil {
 			log.Println(err)
 			return false
 		}
-		
+
 		l := lua.NewState()
-		
+
 		log.Println("  Compiling...")
 		err = l.LoadText(bytes.NewBuffer(script), inFile, 0)
 		if err != nil {
 			log.Println(err)
 			return false
 		}
-		
+
 		log.Println("  Writing Binary...")
 		script = l.DumpFunction(-1, false)
-		
+
 		err = fs.WriteAll(outFile, script)
 		if err != nil {
 			log.Println(err)
 			return false
 		}
-		
+
 		return true
 	}, "Compile a Lua script with the same compiler Rubble uses when generating.\nAll paths are AXIS paths. The AXIS filesystem has the same structure as normal.", []actions.Option{
 		{
-			Name: "script",
-			Help: "The input `file`.",
-			Flag: false,
+			Name:     "script",
+			Help:     "The input `file`.",
+			Flag:     false,
 			Multiple: false,
 		},
 		{
-			Name: "out",
-			Help: "The output `file`.",
-			Flag: false,
+			Name:     "out",
+			Help:     "The output `file`.",
+			Flag:     false,
 			Multiple: false,
 		},
 	})

@@ -1,5 +1,5 @@
 /*
-Copyright 2013-2016 by Milo Christiansen
+Copyright 2013-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -31,45 +31,45 @@ type PackMeta struct {
 	// The name of this addon pack. May be the same as an existing addon name.
 	// This is not required. If you will be listing this pack on a content server it is a good idea to set this.
 	Name string
-	
+
 	// A single line description, unused right now, but will be important for the content server browser later.
 	Desc template.HTML
-	
+
 	// Version information for updating via a content server.
 	VersionStr string
-	VerMajor int
-	VerMinor int
-	VerPatch int
-	
+	VerMajor   int
+	VerMinor   int
+	VerPatch   int
+
 	// If this addon pack is hosted on DFFD this should be set to it's file ID.
 	// If the file cannot be found on a content server the addon loader will use
 	// this ID to look up the file information from DFFD.
 	// Generally content servers are preferred, as they have more, better, information.
 	DFFDID int64
-	
+
 	HostVer *HostVersions
-	
+
 	// A list of addon packs to download in addition to this one. The URLs for the packs are found by querying content
 	// servers, so make sure the packs are listed on one.
 	Dependencies []string
-	
+
 	// Maps of extension->tag for the file tagger. These mappings only effect the addons in the pack that "owns" this meta file.
 	TagsFirst map[string][]string
-	TagsLast map[string][]string
-	
+	TagsLast  map[string][]string
+
 	// A list of custom file writers supplied for this pack.
 	Writers []*FileWriter
-	
-	URL   string // Set automatically by content servers. Don't touch.
+
+	URL   string          // Set automatically by content servers. Don't touch.
 	MD5   *[md5.Size]byte // Set automatically by content servers. Don't touch.
-	Owner string // Set automatically by content servers. Don't touch.
+	Owner string          // Set automatically by content servers. Don't touch.
 }
 
 type HostVersions struct {
 	// Dwarf fortress version this pack is compatible with.
 	DFMajor int // If -1 then this does not require any particular DF version, else must be equal.
 	DFPatch int // Must be equal or greater.
-	
+
 	// Rubble version this pack is compatible with.
 	RblRewrite int // If -1 then any Rubble version will do, else must be equal.
 	RblMajor   int // Must be equal or greater.
@@ -77,27 +77,27 @@ type HostVersions struct {
 }
 
 type FileWriter struct {
-	Desc    string // A short file type description.
-	Dir     string // The AXIS path to write the files to.
+	Desc    string          // A short file type description.
+	Dir     string          // The AXIS path to write the files to.
 	Filter  map[string]bool // All files matching this filter will be written.
-	Comment string // The comment prefix for this file type, if unset the file will not have a header added.
-	
+	Comment string          // The comment prefix for this file type, if unset the file will not have a header added.
+
 	// These two values control the optional file extension compaction.
-	// 
+	//
 	// ExtHas must be an extension to compact. If either part of the extension is ".%" then that part will match
 	// anything. To disable compaction simply set ExtHas to "". Generally ExtHas will be a two-part extension, but
 	// it is perfectly legal to use a single-part extension as well.
-	// 
+	//
 	// If ExtGive is "" then it will be set to the last part extension from ExtHas (respecting the ".%" special
 	// value).
-	// 
+	//
 	// For example specifying ".%.%" for ExtHas and "" for ExtGive will simply strip the first part extension from
 	// all written files.
-	// 
+	//
 	// File extension compaction can get complicated in a hurry...
 	ExtHas  string
-	ExtGive string 
-	
+	ExtGive string
+
 	AddHeader bool // If true then the file will receive a raw file header consisting of the file name without extension.
 	AllowIA   bool // Does this writer work in independent apply mode?
 }
@@ -106,16 +106,16 @@ type FileWriter struct {
 func NewPackMeta() *PackMeta {
 	return &PackMeta{
 		Desc: template.HTML("The author of this addon pack did not provide a description."),
-		
+
 		DFFDID: -1,
-		
+
 		HostVer: &HostVersions{
-			DFMajor: -1,
+			DFMajor:    -1,
 			RblRewrite: -1,
 		},
-		
+
 		TagsFirst: map[string][]string{},
-		TagsLast: map[string][]string{},
+		TagsLast:  map[string][]string{},
 	}
 }
 
@@ -129,7 +129,7 @@ func (pack *PackMeta) MatchVersions(host *HostVersions) bool {
 	} else if pack.HostVer.DFMajor != -1 && pack.HostVer.DFMajor > host.DFMajor {
 		return false
 	}
-	
+
 	// DF version matched, try to match the Rubble version.
 	if pack.HostVer.RblRewrite != -1 && pack.HostVer.RblRewrite == host.RblRewrite {
 		if pack.HostVer.RblMajor == host.RblMajor {

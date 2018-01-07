@@ -1,5 +1,5 @@
 /*
-Copyright 2013-2016 by Milo Christiansen
+Copyright 2013-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -32,8 +32,8 @@ import "net"
 import "time"
 import "flag"
 
-import "rubble8"
-import "rubble8/rblutil/addon"
+import "github.com/milochristiansen/rubble8"
+import "github.com/milochristiansen/rubble8/rblutil/addon"
 
 var addr string
 var nomonitor bool
@@ -46,9 +46,9 @@ const (
 func main() {
 	flag.StringVar(&addr, "addr", ":2220", "Address the server should listen on.")
 	flag.BoolVar(&nomonitor, "nomonitor", false, "Should this instance skip the monitor?")
-	
+
 	flag.Parse()
-	
+
 	name := ""
 	if nomonitor {
 		name = "content server"
@@ -60,7 +60,7 @@ func main() {
 		fmt.Println("Fatal Error:", err)
 		os.Exit(1)
 	}
-	
+
 	defer func() {
 		err := recover()
 		if err != nil {
@@ -74,17 +74,17 @@ func main() {
 			os.Exit(1)
 		}
 	}()
-	
+
 	if nomonitor {
 		// Run the server.
 		fs := rubble8.InitAXIS(".", ".", ".", []string{"rubble/addons"})
-	
+
 		packs, err := addon.NewPackBase(fs)
 		if err != nil {
 			log.Println(err)
 			os.Exit(1)
 		}
-		
+
 		ln, err := net.Listen("tcp", addr)
 		if err != nil {
 			log.Println(err)
@@ -100,36 +100,36 @@ func main() {
 			go packs.ServeConn(log, fs, conn)
 		}
 	}
-	
+
 	// Run the monitor.
 	var restarts [countRestarts]time.Time
-	
+
 	// I really need an interactive console here, but that's impossible without
 	// some way to open a new console window for it.
-	
+
 	for {
 		if t := time.Since(restarts[0]); t < loopThreshold {
 			log.Printf("%d restarts in %v.\n", countRestarts, t)
 			log.Printf("  This server is DOWN at %v\n", time.Now().UTC().Format("06/01/02 15:04:05"))
 			os.Exit(1)
 		}
-		
+
 		copy(restarts[0:], restarts[1:])
 		restarts[len(restarts)-1] = time.Now()
 
 		log.Println("Monitor (re)starting server...")
 		cmd := exec.Command(os.Args[0], "-nomonitor=true", fmt.Sprintf("-addr=%v", addr))
-		
+
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
-		
+
 		err := cmd.Start()
 		if err != nil {
 			log.Println("Could not restart:", err)
 			log.Printf("  This server is DOWN at %v\n", time.Now().UTC().Format("06/01/02 15:04:05"))
 			os.Exit(1)
 		}
-		
+
 		err = cmd.Wait()
 		if err == nil {
 			log.Println("Monitored server exited intensionally, weird...")

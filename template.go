@@ -1,5 +1,5 @@
 /*
-Copyright 2015-2016 by Milo Christiansen
+Copyright 2015-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -22,9 +22,9 @@ misrepresented as being the original software.
 
 package rubble8
 
-import "rubble8/rblutil"
-import "rubble8/rblutil/errors"
-import "rubble8/rblutil/parse"
+import "github.com/milochristiansen/rubble8/rblutil"
+import "github.com/milochristiansen/rubble8/rblutil/errors"
+import "github.com/milochristiansen/rubble8/rblutil/parse"
 
 type Template struct {
 	Code string
@@ -72,9 +72,9 @@ func (state *State) Dispatcher(args []string, stage parse.Stage, file *rblutil.L
 	rtn, err := state.Script.RunScript([]byte(template.Code), name, line, args[1:], template.Tag)
 	if err != nil {
 		if file != nil {
-			errors.RaiseWrappedError("In call to: " + args[0] + " at " + file.PosString(offsets[0]), err)
+			errors.RaiseWrappedError("In call to: "+args[0]+" at "+file.PosString(offsets[0]), err)
 		}
-		errors.RaiseWrappedError("In call to: " + args[0], err)
+		errors.RaiseWrappedError("In call to: "+args[0], err)
 	}
 	return rtn
 }

@@ -1,5 +1,5 @@
 /*
-Copyright 2015-2016 by Milo Christiansen
+Copyright 2015-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -27,19 +27,19 @@ import "sort"
 
 // LineInfo stores offset -> line mapping information for a file in a compact format.
 type LineInfo struct {
-	name string
-	size int // length of the file
-	offset int // Offset the first line in file by this much.
-	lines []int // line -> offset of first char
+	name   string
+	size   int   // length of the file
+	offset int   // Offset the first line in file by this much.
+	lines  []int // line -> offset of first char
 }
 
 // NewLineInfo creates a new LineInfo object with the given information.
 // "name" can be left blank, PosString will automatically compensate.
 func NewLineInfo(name string, line, size int) *LineInfo {
 	return &LineInfo{
-		name: name,
+		name:   name,
 		offset: line,
-		size: size,
+		size:   size,
 	}
 }
 
@@ -47,7 +47,7 @@ func NewLineInfo(name string, line, size int) *LineInfo {
 // The line offset must be larger than the offset for the previous line
 // and smaller than the file size; otherwise the line offset is ignored.
 func (f *LineInfo) AddLine(offset int) {
-	if i := len(f.lines); (i == 0 || f.lines[i - 1] < offset) && offset < f.size {
+	if i := len(f.lines); (i == 0 || f.lines[i-1] < offset) && offset < f.size {
 		f.lines = append(f.lines, offset)
 	}
 }
@@ -58,11 +58,11 @@ func (f *LineInfo) Position(offset int) (name string, line, column int) {
 	if offset > f.size || offset < 0 {
 		return f.name, -1, -1
 	}
-	
+
 	if len(f.lines) == 0 {
 		return f.name, f.offset, offset + 1
 	}
-	
+
 	i := sort.SearchInts(f.lines, offset) - 1
 	if i >= 0 {
 		return f.name, i + f.offset + 1, offset - f.lines[i] + 1
@@ -80,7 +80,7 @@ func (f *LineInfo) PosString(offset int) string {
 		}
 		return a + "|invalid offset"
 	}
-	
+
 	if a == "" {
 		return fmt.Sprintf("L:%v|C:%v", b, c)
 	}

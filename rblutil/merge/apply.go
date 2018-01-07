@@ -1,5 +1,5 @@
 /*
-Copyright 2014-2016 by Milo Christiansen
+Copyright 2014-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -21,25 +21,25 @@ misrepresented as being the original software.
 */
 
 // This package provides a powerful match/merge engine for working with raw files.
-// 
+//
 // This engine uses a rule-based matcher that allows tags to be matched to rules or
 // tags to rules and each other. When matching two sets of tags together it is possible
 // to merge parts of the one set into the other (based on the provided rules of course).
 package merge
 
-import "rubble8/rblutil/rparse"
+import "github.com/milochristiansen/rubble8/rblutil/rparse"
 import "fmt"
 
 // Apply modifies the tags in file with information from the tree.
 func Apply(tags []*rparse.Tag, tree *TagNode) {
 	node := tree
-	
+
 nexttag:
 	for _, tag := range tags {
 		if tag.CommentsOnly {
 			continue
 		}
-		
+
 		// Try to get a match from the current node's children
 		nnode, ni := node.Match(tag)
 		if nnode != nil {
@@ -47,7 +47,7 @@ nexttag:
 			node = nnode
 			continue
 		}
-		
+
 		// No match, scan up the tree to see if it is a higher level tag.
 		n := node
 		for n.Parent != nil {
@@ -59,7 +59,7 @@ nexttag:
 				continue nexttag
 			}
 		}
-		
+
 		// Relevel the tree.
 		// This prevents lower level tags belonging to unmatched upper level tags from appearing to
 		// be attached to the last matched upper level tag
@@ -74,7 +74,7 @@ nexttag:
 				continue nexttag
 			}
 		}
-		
+
 		// If the tag still matches nothing then ignore it.
 	}
 }
@@ -92,14 +92,14 @@ nexttag:
 			continue
 		}
 		t.Comments = "" // Zap the comments to prevent messy error messages.
-		
+
 		// Try to get a match from the current rule's children
 		nnode, _ := node.Match(t)
 		if nnode != nil {
 			node = nnode
 			continue
 		}
-		
+
 		// No match, scan up the tree to see if it is a higher level tag.
 		n := node
 		for n.Parent != nil {
@@ -110,9 +110,9 @@ nexttag:
 				continue nexttag
 			}
 		}
-		
+
 		missing = append(missing, fmt.Sprintf("\"%v\" (line: %v).", t, t.Line))
-		
+
 		// When working with rules there is no need to manually relevel the tree on match failure.
 	}
 	return missing

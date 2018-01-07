@@ -1,5 +1,5 @@
 /*
-Copyright 2013-2016 by Milo Christiansen
+Copyright 2013-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -26,25 +26,25 @@ package addon
 import "sort"
 import "strings"
 
-// Database stores loaded addons 
+// Database stores loaded addons
 type Database struct {
 	List     []*Addon
 	Table    map[string]*Addon
 	DocPacks []*Meta
 	Meta     map[string]*Meta
 	Packs    map[string]*PackMeta
-	Banks	 map[string]string
-	
+	Banks    map[string]string
+
 	Writers []*FileWriter
-	
+
 	// Maps of extension->tag for the file tagger. These mappings are global.
 	tagsFirst map[string][]string
-	tagsLast map[string][]string
-	
+	tagsLast  map[string][]string
+
 	updateBlacklist map[string]bool
-	
+
 	Servers []string
-	
+
 	Globals *FileList
 }
 
@@ -107,10 +107,10 @@ func (list *FileList) Copy() *FileList {
 	copy(nlist.Order, list.Order)
 	for name, file := range list.Data {
 		nlist.Data[name] = &File{
-			Name: file.Name,
-			Source: file.Source,
+			Name:    file.Name,
+			Source:  file.Source,
 			Content: append(make([]byte, 0, len(file.Content)), file.Content...),
-			Tags: map[string]bool{},
+			Tags:    map[string]bool{},
 		}
 		for tag, state := range file.Tags {
 			nlist.Data[name].Tags[tag] = state
@@ -256,6 +256,7 @@ main:
 }
 
 type stringSorter []string
+
 func (p stringSorter) Len() int           { return len(p) }
 func (p stringSorter) Less(i, j int) bool { return strings.ToLower(p[i]) < strings.ToLower(p[j]) }
 func (p stringSorter) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }

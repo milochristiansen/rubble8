@@ -1,5 +1,5 @@
 /*
-Copyright 2016 by Milo Christiansen
+Copyright 2016-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -29,17 +29,17 @@ func Parse(input []byte, fname string, line int) []Data {
 	inUnit := false
 	inBlock := false
 	blockAccum := make([]byte, 0, 10240)
-	
+
 	var units []Data
 	var cUnit Data
-	
+
 	// This is basically a faster version of the commonly used retarded line-based parser.
 	for i := 0; i < len(input); i++ {
 		char := input[i]
 		if char == '\n' {
 			line++
 		}
-		
+
 		// Possible beginning of unit
 		if !inUnit && char == '>' {
 			// If this is the start of a unit read the ID and anything else up to the end of the line.
@@ -48,7 +48,7 @@ func Parse(input []byte, fname string, line int) []Data {
 				inUnit = true
 				inBlock = true
 				cUnit = Data{}
-				
+
 				for ; i < len(input); i++ {
 					if input[i] == '\n' {
 						line++
@@ -64,20 +64,20 @@ func Parse(input []byte, fname string, line int) []Data {
 				continue
 			}
 		}
-		
+
 		// Possible block switch
 		if inUnit && inBlock && char == '=' {
 			if len(input) > i+2 && input[i+1] == '=' && input[i+2] == '=' {
 				i += 2
 				inBlock = false
-				
+
 				cUnit.OutLine = line
 				cUnit.In = strings.TrimSpace(string(blockAccum))
 				blockAccum = blockAccum[0:0]
 				continue
 			}
 		}
-		
+
 		// Possible end of unit
 		if inUnit && !inBlock && char == '<' {
 			if len(input) > i+2 && input[i+1] == '<' && input[i+2] == '<' {
@@ -89,7 +89,7 @@ func Parse(input []byte, fname string, line int) []Data {
 				continue
 			}
 		}
-		
+
 		if inUnit {
 			blockAccum = append(blockAccum, char)
 		}

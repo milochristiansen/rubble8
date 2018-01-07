@@ -1,5 +1,5 @@
 /*
-Copyright 2013-2016 by Milo Christiansen
+Copyright 2013-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -26,9 +26,9 @@ package parse
 import "strings"
 import "strconv"
 
-import "rubble8/rblutil"
-import "rubble8/rblutil/addon"
-import "rubble8/rblutil/errors"
+import "github.com/milochristiansen/rubble8/rblutil"
+import "github.com/milochristiansen/rubble8/rblutil/addon"
+import "github.com/milochristiansen/rubble8/rblutil/errors"
 
 // Parse stage constants
 type Stage int
@@ -86,7 +86,7 @@ loop:
 				out = append(out, templateToString(lex)...)
 				continue
 			}
-			
+
 			lex.GetNext(TknString)
 			var rawparams []string
 			if prehandler != nil {
@@ -112,7 +112,7 @@ loop:
 				}
 			}
 			lex.GetNext(TknTagEnd)
-			
+
 			if prehandler == nil || prehandler(params, stage, file, offsets) {
 				out = append(out, handler(params, stage, file, offsets)...)
 			} else {

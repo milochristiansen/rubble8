@@ -1,5 +1,5 @@
 /*
-Copyright 2013-2016 by Milo Christiansen
+Copyright 2013-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -22,9 +22,9 @@ misrepresented as being the original software.
 
 package rubble8
 
-import "rubble8/rblutil"
-import "rubble8/rblutil/errors"
-import "rubble8/rblutil/addon"
+import "github.com/milochristiansen/rubble8/rblutil"
+import "github.com/milochristiansen/rubble8/rblutil/errors"
+import "github.com/milochristiansen/rubble8/rblutil/addon"
 
 import "github.com/milochristiansen/axis2"
 import "github.com/milochristiansen/axis2/sources"
@@ -42,13 +42,13 @@ func TSetModeRun(region, dfdir string, addons []string, data *addon.Database, fs
 	log.Println("Entering Tileset Mode for Region:", region)
 
 	defer errors.TrapError(&err, log)
-	
+
 	old := fs.SwapMount("out", sources.NewOSDir(output), true)
 	if old == nil {
 		errors.RaiseError("Could not remount the \"out\" mount point")
 	}
 	defer fs.SwapMount("out", old, true)
-	
+
 	oops, state := NewState(data, fs, log)
 	if oops != nil {
 		return oops
@@ -74,7 +74,7 @@ func TSetModeRun(region, dfdir string, addons []string, data *addon.Database, fs
 
 	rawFiles := []*addon.File{}
 	for _, filepath := range state.FS.ListFiles("out/objects") {
-		content, err := state.FS.ReadAll("out/objects/"+filepath)
+		content, err := state.FS.ReadAll("out/objects/" + filepath)
 		if err != nil {
 			return err
 		}

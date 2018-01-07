@@ -1,5 +1,5 @@
 /*
-Copyright 2016 by Milo Christiansen
+Copyright 2016-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -28,20 +28,20 @@ import "strings"
 // Data is a single template test unit.
 type Data struct {
 	ID string
-	
+
 	InLine int
 	In     string
-	
+
 	OutLine int
 	Out     string
 }
 
 func (t Data) String() string {
 	return ">>> " + t.ID + ":\n" +
-	t.In +
-	"\n===\n" +
-	t.Out +
-	"\n<<<"
+		t.In +
+		"\n===\n" +
+		t.Out +
+		"\n<<<"
 }
 
 func (t Data) Example() string {

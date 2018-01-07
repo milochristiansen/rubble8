@@ -1,5 +1,5 @@
 /*
-Copyright 2014-2016 by Milo Christiansen
+Copyright 2014-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -47,7 +47,7 @@ type Tag struct {
 	// String should only return the comments.
 	// Used for some special tags (the leading comments placeholder basically).
 	CommentsOnly bool
-	
+
 	Line int
 }
 

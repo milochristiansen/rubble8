@@ -1,5 +1,5 @@
 /*
-Copyright 2015-2016 by Milo Christiansen
+Copyright 2015-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -35,8 +35,8 @@ import "github.com/milochristiansen/lua/lmodstring"
 import "github.com/milochristiansen/lua/lmodtable"
 import "github.com/milochristiansen/lua/lmodmath"
 
-import "rubble8"
-import "rubble8/rblutil/addon"
+import "github.com/milochristiansen/rubble8"
+import "github.com/milochristiansen/rubble8/rblutil/addon"
 
 import "bytes"
 import "strconv"
@@ -54,9 +54,9 @@ func New(state *rubble8.State) rubble8.Runner {
 	}
 	l := runner.l
 	l.Output = state.Log
-	
+
 	l.NativeTrace = true
-	
+
 	// Load standard modules
 	l.Push(lmodbase.Open)
 	l.Call(0, 0)
@@ -73,7 +73,7 @@ func New(state *rubble8.State) rubble8.Runner {
 	l.Push("RUBBLE_STATE")
 	l.Push(state)
 	l.SetTableRaw(lua.RegistryIndex)
-	
+
 	// And finally preload the Rubble API
 	l.Preload("rubble", rubbleLuaAPI)
 	l.Preload("axis", axisLuaAPI)
@@ -118,7 +118,7 @@ func (runner *LuaRunner) Run(script []byte, tag string, name string, line int, a
 			return "", err
 		}
 	}
-	
+
 	for _, v := range args {
 		l.Push(v)
 	}
@@ -127,7 +127,7 @@ func (runner *LuaRunner) Run(script []byte, tag string, name string, line int, a
 	if err != nil {
 		return "", err
 	}
-	
+
 	if l.IsNil(-1) {
 		l.Pop(1)
 		return "", nil

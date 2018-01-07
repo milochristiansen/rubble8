@@ -1,5 +1,5 @@
 /*
-Copyright 2013-2016 by Milo Christiansen
+Copyright 2013-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -35,61 +35,61 @@ import "sync"
 // custom logger you can provide your own.
 type Logger interface {
 	io.Writer
-	
+
 	// Printf prints to the log, see ftm.Printf.
 	Printf(format string, msg ...interface{})
-	
+
 	// Println prints to the log, see ftm.Println.
 	Println(msg ...interface{})
-	
+
 	// Print prints to the log, see ftm.Print.
 	Print(msg ...interface{})
-	
+
 	// Warnf prints to the log and the warnings buffer, see ftm.Printf.
 	Warnf(format string, msg ...interface{})
-	
+
 	// Warnln prints to the log and the warnings buffer, see ftm.Println.
 	Warnln(msg ...interface{})
-	
+
 	// Warn prints to the log and the warnings buffer, see ftm.Print.
 	Warn(msg ...interface{})
-	
+
 	// WarnExtraf prints to the log and the warnings buffer but does not increment the warning count, see ftm.Printf.
 	WarnExtraf(format string, msg ...interface{})
-	
+
 	// WarnExtraln prints to the log and the warnings buffer but does not increment the warning count, see ftm.Println.
 	WarnExtraln(msg ...interface{})
-	
+
 	// WarnExtra prints to the log and the warnings buffer but does not increment the warning count, see ftm.Print.
 	WarnExtra(msg ...interface{})
-	
+
 	// WarnOnlyf prints to the warnings buffer, see ftm.Printf.
 	WarnOnlyf(format string, msg ...interface{})
-	
+
 	// WarnOnlyln prints to the warnings buffer, see ftm.Println.
 	WarnOnlyln(msg ...interface{})
-	
+
 	// WarnOnly prints to the warnings buffer, see ftm.Print.
 	WarnOnly(msg ...interface{})
-	
+
 	// WarnOnlyExtraf prints to the warnings buffer but does not increment the warning count, see ftm.Printf.
 	WarnOnlyExtraf(format string, msg ...interface{})
-	
+
 	// WarnOnlyExtraln prints to the warnings buffer but does not increment the warning count, see ftm.Println.
 	WarnOnlyExtraln(msg ...interface{})
-	
+
 	// WarnOnlyExtra prints to the warnings buffer but does not increment the warning count, see ftm.Print.
 	WarnOnlyExtra(msg ...interface{})
-	
+
 	// ClearWarnings clears the warnings buffer and resets the warning count.
 	ClearWarnings()
-	
+
 	// WarnCount returns the number of warnings in the current buffer.
 	WarnCount() int
-	
+
 	// WarnBuffer returns the warnings buffer
 	WarnBuffer() []byte
-	
+
 	// LogBuffer returns the log up to now or a shortened version if it gets too large.
 	LogBuffer() []byte
 }
@@ -98,20 +98,20 @@ type Logger interface {
 type defaultLogger struct {
 	wc int
 	wb *bytes.Buffer
-	
+
 	lb *bytes.Buffer
-	
+
 	file *os.File
-	
+
 	lock *sync.Mutex
 }
 
 // NewLogger creates a new default logger.
-// 
+//
 // The default logger writes to a single file and an in-memory buffer. The buffer is limited to
 // 50K. Longer logs will have their beginnings periodically truncated to keep the buffer from
 // getting too large. The log file will, of course, contain the entire log.
-// 
+//
 // All methods are safe for concurrent access.
 func NewLogger() (error, Logger) {
 	file, err := os.Create("./rubble.log")
@@ -119,18 +119,18 @@ func NewLogger() (error, Logger) {
 		return err, nil
 	}
 
-	log := &defaultLogger {
-		wb: new(bytes.Buffer),
-		lb: new(bytes.Buffer),
+	log := &defaultLogger{
+		wb:   new(bytes.Buffer),
+		lb:   new(bytes.Buffer),
 		file: file,
 		lock: new(sync.Mutex),
 	}
-	
+
 	// Not useful. The log is never deleted before the program exits.
 	//runtime.SetFinalizer(log, func(log *defaultLogger){
 	//	log.file.Close()
 	//})
-	
+
 	return nil, log
 }
 
@@ -139,28 +139,28 @@ var truncMsg = []byte("\n(Buffer Truncated)\n")
 func (log *defaultLogger) Write(p []byte) (n int, err error) {
 	log.lock.Lock()
 	defer log.lock.Unlock()
-	
+
 	// If the buffer is greater than 50K shift the last half up and truncate it.
 	// This also prefixes the buffer with a message stating it was truncated.
 	if log.lb != nil && log.lb.Len() > 50*1024 {
-		
+
 		b := log.lb.Bytes()
-		
+
 		// Make sure we truncate at a line boundary
 		bb := b[25*1024:]
 		for len(bb) > 0 && bb[0] != '\n' {
 			bb = bb[1:]
 		}
-		
+
 		copy(b, truncMsg)
 		copy(b[len(truncMsg):], bb)
-		log.lb.Truncate(len(truncMsg)+len(bb))
+		log.lb.Truncate(len(truncMsg) + len(bb))
 	}
-	
+
 	if log.lb != nil {
 		log.lb.Write(p) // No error possible on writes to a bytes.Buffer
 	}
-	
+
 	n, err = log.file.Write(p)
 	if err != nil {
 		return
@@ -169,7 +169,7 @@ func (log *defaultLogger) Write(p []byte) (n int, err error) {
 		err = io.ErrShortWrite
 		return
 	}
-	
+
 	n, err = os.Stdout.Write(p)
 	if err != nil {
 		return
@@ -178,7 +178,7 @@ func (log *defaultLogger) Write(p []byte) (n int, err error) {
 		err = io.ErrShortWrite
 		return
 	}
-	
+
 	return len(p), nil
 }
 
@@ -281,8 +281,8 @@ func LogSeparator(log Logger) {
 // Use for consistency.
 func LogHeader(log Logger, version string) {
 	rand.Seed(time.Now().Unix())
-	log.Print("Rubble v"+version+"\n")
-	log.Print(startupLines[rand.Int()%(len(startupLines)-1)]+"\n")
+	log.Print("Rubble v" + version + "\n")
+	log.Print(startupLines[rand.Int()%(len(startupLines)-1)] + "\n")
 	LogSeparator(log)
 }
 

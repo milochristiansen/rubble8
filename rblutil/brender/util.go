@@ -1,5 +1,5 @@
 /*
-Copyright 2015-2016 by Milo Christiansen
+Copyright 2015-2018 by Milo Christiansen
 
 This software is provided 'as-is', without any express or implied warranty. In
 no event will the authors be held liable for any damages arising from the use of
@@ -28,7 +28,7 @@ import "errors"
 import "regexp"
 import "strconv"
 
-import "rubble8/rblutil/rparse"
+import "github.com/milochristiansen/rubble8/rblutil/rparse"
 
 // Isolate isolates a single building definition in a parsed raw file.
 // Returns an empty slice if the building was not found.
