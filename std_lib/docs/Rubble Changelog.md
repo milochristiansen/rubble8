@@ -31,6 +31,8 @@ Other Changes:
 
 * Rubble is now on [GitHub](https://github.com/milochristiansen/rubble8)! This required changing all the import paths,
   although nothing should break because of this.
+* Updated the build instructions to reflect the new import path and the fact that source is now on github rather than
+  included in the package.
 
 
 8.5.3 (For DF 44.3) Fixed raw errors.
