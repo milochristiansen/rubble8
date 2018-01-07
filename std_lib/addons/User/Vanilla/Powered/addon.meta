@@ -1,0 +1,12 @@
+{
+	"Tags": {
+		"Library": true,
+		"DFHack": true
+	},
+	"Header": "Powered workshop support addon (and general powered workshop documentation).",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered"
+	]
+}

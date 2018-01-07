@@ -1,0 +1,10 @@
+{
+	"Header": "Drill holes and pump fluids up them, no more pump stacks required.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered",
+		"Libs/Fluids"
+	]
+}

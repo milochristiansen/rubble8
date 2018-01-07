@@ -1,0 +1,7 @@
+{
+	"Header": "Adds a batch kiln that can make 5x the stuff with 4x the material and 1x the fuel.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

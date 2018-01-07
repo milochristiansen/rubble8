@@ -1,0 +1,9 @@
+{
+	"Header": "A powered spinning machine, spin thread from plants.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered"
+	]
+}

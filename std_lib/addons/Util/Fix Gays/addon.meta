@@ -1,0 +1,8 @@
+{
+	"Tags": {
+		"SaveSafe": true,
+		"DFHack": true
+	},
+	"Header": "Makes all creatures marry the opposite sex only.",
+	"DescFile": "addon.md"
+}

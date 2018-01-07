@@ -1,0 +1,10 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "This addon provides templates for displaying announcements to the player.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

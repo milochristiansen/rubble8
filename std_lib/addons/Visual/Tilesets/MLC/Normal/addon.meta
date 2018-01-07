@@ -1,0 +1,7 @@
+{
+	"Header": "A simple addon that installs my custom ASCII-like tileset (normal version).",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

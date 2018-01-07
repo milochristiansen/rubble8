@@ -1,0 +1,7 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "Adds templates designed to allow you to add new worldgen parameters or embark profiles.",
+	"DescFile": "addon.md"
+}

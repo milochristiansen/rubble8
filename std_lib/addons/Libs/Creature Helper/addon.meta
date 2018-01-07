@@ -1,0 +1,11 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	
+	"Header": "Templates to help build creatures with a minimum of fuss.",
+	
+	"DescFile": "addon.md",
+	
+	"Activates": ["Libs/Base"]
+}

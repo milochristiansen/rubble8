@@ -1,0 +1,9 @@
+{
+	"Header": "Adds some basic castes to the saurians.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"User/Saurian",
+		"Libs/Castes"
+	]
+}

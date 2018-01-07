@@ -1,0 +1,7 @@
+{
+	"Header": "Generic animal fat, tallow, and soap.",
+	"Activates": [
+		"Libs/Base",
+		"User/Generic Animal Mats"
+	]
+}

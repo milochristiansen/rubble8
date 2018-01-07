@@ -1,0 +1,8 @@
+{
+	"Header": "Adds the boulder press, which allows you to recolor boulders via the wonders of dwarven masonry.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"User/Block"
+	]
+}

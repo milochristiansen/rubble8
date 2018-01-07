@@ -1,0 +1,7 @@
+{
+	"Header": "Generic animal bones.",
+	"Activates": [
+		"Libs/Base",
+		"User/Generic Animal Mats"
+	]
+}

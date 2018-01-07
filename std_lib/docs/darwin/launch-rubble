@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# This script is written by Bay12 user jecowa, an awesome person who
+# is the main reason Rubble works properly on OSX.
+
+dir=${0%/*}
+if [ -d "$dir" ]; then
+	cd "$dir"
+fi
+./darwin/rubble
+

@@ -1,0 +1,7 @@
+{
+	"Header": "Generic animal sinew and nerves.",
+	"Activates": [
+		"Libs/Base",
+		"User/Generic Animal Mats"
+	]
+}

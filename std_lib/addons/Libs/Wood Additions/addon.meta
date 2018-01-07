@@ -1,0 +1,10 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "Adds several small tweaks to wood materials.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

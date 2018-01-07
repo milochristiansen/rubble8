@@ -1,0 +1,9 @@
+{
+	"Header": "Produces a small amount of power as long as a creature is pastured on top of it.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered"
+	]
+}

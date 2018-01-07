@@ -1,0 +1,9 @@
+{
+	"Header": "A powered screw press, press liquids from items.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered"
+	]
+}

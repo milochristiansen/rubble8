@@ -1,0 +1,24 @@
+{
+	"Tags": {
+		"Dev": true
+	},
+	"Header": "This addon adds \"dummy workshop\" eg. empty workshops registered to `ADDON_HOOK_PLAYABLE`.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	],
+	"Vars": {
+		"DEV_DUMMY_WSHOPS_COUNT": {
+			"Name": "How many dummy workshops should be generated?",
+			"Values": [
+				"5"
+			]
+		},
+		"DEV_DUMMY_WSHOPS_FURNACE_COUNT": {
+			"Name": "How many dummy furnaces should be generated?",
+			"Values": [
+				"5"
+			]
+		}
+	}
+}

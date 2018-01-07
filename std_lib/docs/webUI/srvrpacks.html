@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rubble Web UI: Browse Addon Packs</title>
+	
+	<link rel="stylesheet" type="text/css" href="axis/rubble/other/webUI/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="axis/rubble/other/webUI/theme.css"/>
+	
+	<script src="axis/rubble/other/webUI/jquery.js"></script>
+	<script src="axis/rubble/other/webUI/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// Kill the back button as best I can. There may be a better way to do this, but I don't know it.
+			$("a").click(function(evnt) {
+				if (evnt.target.href === undefined && this.href !== undefined) {
+					evnt.preventDefault()
+					evnt.stopPropagation()
+					window.location.replace(this.href)
+				} else if (evnt.target.href !== undefined && evnt.target.href !== "" && evnt.target.href !== "#") {
+					evnt.preventDefault()
+					evnt.stopPropagation()
+					window.location.replace(evnt.target.href)
+				}
+			})
+			// No link fixers, we can't come back here properly anyway.
+			
+			$("button").button()
+			$("input:checkbox").checkboxradio()
+			
+			$("#Back").click(function(evnt) {
+				evnt.stopPropagation()
+				window.location.replace("http://" + window.location.host + "/")
+			})
+			$("#Download").click(function(evnt) {
+				evnt.stopPropagation()
+				var query = ""
+				
+				$("#PackList input").each(function(i, elem) {
+					if ($(elem).hasClass("ui-checkboxradio-checked")) {
+						if (query == "") {
+							query += "?"+encodeURIComponent(elem.name)+"=true"
+						} else {
+							query += "&"+encodeURIComponent(elem.name)+"=true"
+						}
+					}
+				})
+				
+				window.location.replace("http://" + window.location.host + "/srvrpacks_down"+query)
+			})
+		})
+	</script>
+</head>
+<body>
+	<div id="PackList">
+	{{- range $k, $v := .Packs}}
+		<input id="PCK:{{$k}}" type="checkbox"{{if (index $.Have $k)}} checked{{end}} name="{{$k}}"><label for="PCK:{{$k}}" style="width: 400px; text-align: left;">{{$k}}</label>{{$v.Desc}}
+	{{- end}}
+	</div>
+	<p><div id="Download" class="button">Download Selected</div></p>
+	<p><div id="Back" class="button">Back to Menu</div></p>
+</body>
+</html>

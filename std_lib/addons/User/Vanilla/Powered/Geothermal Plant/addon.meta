@@ -1,0 +1,9 @@
+{
+	"Header": "This workshop produces power based on the amount of magma below.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered"
+	]
+}

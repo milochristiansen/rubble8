@@ -1,0 +1,9 @@
+{
+	"Header": "Fling items and units with a programmable direction, angle, and power.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered"
+	]
+}

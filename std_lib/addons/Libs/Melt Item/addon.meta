@@ -1,0 +1,9 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "Adds support code for making custom melt item reactions.",
+	"Activates": [
+		"Libs/Persist"
+	]
+}

@@ -1,0 +1,40 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "Powered workshop support addon.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Fluids",
+		"Libs/Items",
+		"Libs/Items/Filter",
+		"Libs/Upgrade Building",
+		"Libs/Change Build List"
+	],
+	"Vars": {
+		"POWERED_WORKSHOPS_MANGLE_SHOP": {
+			"Name": "Should invalid inputs have chance to damage powered workshops?",
+			"Values": [
+				"YES",
+				"NO"
+			]
+		},
+		"POWERED_WORKSHOPS_MANGLE_UNIT": {
+			"Name": "Should powered workshops mangle intruding creatures when they have no items?",
+			"Values": [
+				"YES",
+				"NO"
+			]
+		},
+		"POWERED_WORKSHOPS_OUTPUT_STYLE": {
+			"Name": "Which output style do you want to use for powered workshops?",
+			"Values": [
+				"Rubble",
+				"NoDiag",
+				"Sides",
+				"Masterwork"
+			]
+		}
+	}
+}

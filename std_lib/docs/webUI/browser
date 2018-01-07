@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if uname -s | grep -i "linux" >/dev/null; then
+	xdg-open "$1"
+	exit 0
+elif uname -s | grep -i "darwin" >/dev/null; then
+	open "$1"
+	exit 0
+else
+	echo "Could not determine your operating system. Edit the browser script and try again."
+	exit 1
+fi
+

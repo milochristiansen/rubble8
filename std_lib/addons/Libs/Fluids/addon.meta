@@ -1,0 +1,6 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "Installs the extremely useful rubble_fluids Lua pseudo module and it's companion command rubble_fluids."
+}

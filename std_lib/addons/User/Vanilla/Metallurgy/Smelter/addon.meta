@@ -1,0 +1,7 @@
+{
+	"Header": "Replaces the default ore smelting reactions with a better set.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

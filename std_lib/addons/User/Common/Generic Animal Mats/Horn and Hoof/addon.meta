@@ -1,0 +1,7 @@
+{
+	"Header": "Generic animal horn and hooves.",
+	"Activates": [
+		"Libs/Base",
+		"User/Generic Animal Mats"
+	]
+}

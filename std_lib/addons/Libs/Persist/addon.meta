@@ -1,0 +1,6 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "Adds a simply wrapper for the DFHack persistence API."
+}

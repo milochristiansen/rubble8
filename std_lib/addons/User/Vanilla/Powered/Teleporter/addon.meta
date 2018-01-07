@@ -1,0 +1,9 @@
+{
+	"Header": "Teleports dwarves to their destination.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered"
+	]
+}

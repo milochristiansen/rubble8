@@ -1,0 +1,10 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "This addon adds templates designed to make it easier to manage colors.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

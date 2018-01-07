@@ -1,0 +1,7 @@
+{
+	"Header": "Adds some basic adventure mode crafting reactions, mostly useful to help jump-start use of advfort.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

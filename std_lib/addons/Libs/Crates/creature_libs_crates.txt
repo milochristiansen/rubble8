@@ -1,0 +1,9 @@
+[OBJECT:CREATURE]
+
+[CREATURE:LIBS_CRATES_CREATURE]
+	[NAME:libs_crates:libs_crates:libs_crates]
+	
+	{#CRATE_MATS}
+	
+	[ARENA_RESTRICTED]
+	[DOES_NOT_EXIST]

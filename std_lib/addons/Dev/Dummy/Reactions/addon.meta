@@ -1,0 +1,18 @@
+{
+	"Tags": {
+		"Dev": true
+	},
+	"Header": "This addon adds \"dummy reactions\" eg. empty reactions registered to `ADDON_HOOK_PLAYABLE`.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	],
+	"Vars": {
+		"DEV_DUMMY_REACTION_COUNT": {
+			"Name": "How many dummy reactions should be generated?",
+			"Values": [
+				"15"
+			]
+		}
+	}
+}

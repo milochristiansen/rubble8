@@ -1,0 +1,10 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "This addon provides DFHack modules to help create semi-automated workshops.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

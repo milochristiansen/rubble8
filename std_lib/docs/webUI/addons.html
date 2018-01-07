@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rubble Web UI: Addon List</title>
+	
+	<link rel="stylesheet" type="text/css" href="/axis/rubble/other/webUI/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="/axis/rubble/other/webUI/theme.css"/>
+
+	<script src="/axis/rubble/other/webUI/jquery.js"></script>
+	<script src="/axis/rubble/other/webUI/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// Kill the back button as best I can. There may be a better way to do this, but I don't know it.
+			$("a").click(function(evnt) {
+				if (evnt.target.href === undefined && this.href !== undefined) {
+					evnt.preventDefault()
+					evnt.stopPropagation()
+					window.location.replace(this.href)
+				} else if (evnt.target.href !== undefined && evnt.target.href !== "" && evnt.target.href !== "#") {
+					evnt.preventDefault()
+					evnt.stopPropagation()
+					window.location.replace(evnt.target.href)
+				}
+			})
+			$("a").each(function(i, elem) {
+				// Fix addon links
+				if (elem.href.indexOf("/addondata?addon=") != -1) {
+					elem.href = elem.href + "&from=" + escape(window.location.pathname + window.location.search) + "&fromname=Previous Page"
+				}
+				
+				// Fix doc links
+				if (elem.href.indexOf("/doc/") != -1) {
+					if (elem.search != "") {
+						elem.href = "http://" + elem.host + elem.pathname + elem.search + "&from=" + escape(window.location.pathname + window.location.search) + elem.hash
+					} else {
+						elem.href = "http://" + elem.host + elem.pathname + "?from=" + escape(window.location.pathname + window.location.search) + elem.hash
+					}
+				}
+			})
+			
+			$("button").button()
+			$("button.Back").click(function(evnt) {
+				window.location.replace("http://" + window.location.host + "/")
+			})
+		})
+	</script>
+</head>
+<body>
+	<p><button class="Back" class="button">Back to Menu</button></p>
+	<table>
+		{{range .Addons.List}}{{if not .Meta.Tags.DocPack}}<tr><td><a href="/addondata?addon={{.Meta.Name}}">{{.Meta.Name}}</a></td><td>{{.Meta.Header}}</td></tr>
+		{{end}}{{end}}
+	</table>
+	<p><button class="Back" class="button">Back to Menu</button></p>
+</body>
+</html>

@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rubble Web UI: Running Operation</title>
+	
+	<link rel="stylesheet" type="text/css" href="axis/rubble/other/webUI/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="axis/rubble/other/webUI/theme.css"/>
+	
+	<script src="/axis/rubble/other/webUI/jquery.js"></script>
+	<!--<script src="/axis/rubble/other/webUI/jquery-ui.js"></script>-->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			window.location.replace("http://" + window.location.host + "{{.}}")
+		})
+	</script>
+</head>
+<body>
+	<h2>Rubble is working</h2>
+	<p>Please wait while the requested operation completes.
+	<p>You will automatically be redirected to the log page to view the results of the operation once Rubble is finished.
+</body>
+</html>

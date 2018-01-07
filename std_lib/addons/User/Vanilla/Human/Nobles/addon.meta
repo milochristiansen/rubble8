@@ -1,0 +1,10 @@
+{
+	"Header": "Gives humans a static set of nobles (as required for a playable race).",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	],
+	"Incompatible": [
+		"User/Fix/Human Diplomats"
+	]
+}

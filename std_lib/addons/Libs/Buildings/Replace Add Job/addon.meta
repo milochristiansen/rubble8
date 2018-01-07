@@ -1,0 +1,10 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "DFHack Lua functions for replacing a building's add job menu with a custom one.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Buildings"
+	]
+}

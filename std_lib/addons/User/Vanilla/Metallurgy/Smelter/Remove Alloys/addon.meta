@@ -1,0 +1,7 @@
+{
+	"Header": "Removes all the vanilla alloy reactions, it is not a good idea to use this without `addon:User/Metallurgy`!",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

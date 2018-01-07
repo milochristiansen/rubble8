@@ -1,0 +1,7 @@
+{
+	"Header": "Glue wooden planks together to make laminated logs, which are more valuable than most wood.",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Wood Additions"
+	]
+}

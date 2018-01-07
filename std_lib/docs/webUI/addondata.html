@@ -1,0 +1,141 @@
+{{with .Addon}}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rubble Web UI: Addon Information for "{{.Meta.Name}}"{{if ne .Meta.Version ""}} ({{.Meta.Version}}){{end}}</title>
+	
+	<link rel="stylesheet" type="text/css" href="/axis/rubble/other/webUI/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="/axis/rubble/other/webUI/theme.css"/>
+
+	<script src="/axis/rubble/other/webUI/jquery.js"></script>
+	<script src="/axis/rubble/other/webUI/jquery-ui.js"></script>
+	<script type="text/javascript">
+		// This function is depreciated.
+		function Toggle(id) {
+			// Trying to escape all the special chars is an exercise in futility.
+			$(document.getElementById(id)).slideToggle("fast")
+		}
+
+		$(document).ready(function() {
+			// Kill the back button as best I can. There may be a better way to do this, but I don't know it.
+			$("a").click(function(evnt) {
+				if (evnt.target.href === undefined && this.href !== undefined) {
+					evnt.preventDefault()
+					evnt.stopPropagation()
+					window.location.replace(this.href)
+				} else if (evnt.target.href !== undefined && evnt.target.href !== "" && evnt.target.href !== "#") {
+					evnt.preventDefault()
+					evnt.stopPropagation()
+					window.location.replace(evnt.target.href)
+				}
+			})
+			$("a").each(function(i, elem) {
+				// Fix addon links
+				if (elem.href.indexOf("/addondata?addon=") != -1) {
+					elem.href = elem.href + "&from={{urlquery $.FromUrl}}&fromname={{urlquery $.FromName}}"
+				}
+				
+				// Fix doc links
+				if (elem.href.indexOf("/doc/") != -1) {
+					if (elem.search != "") {
+						elem.href = "http://" + elem.host + elem.pathname + elem.search + "&from=" + escape(window.location.pathname + window.location.search) + elem.hash
+					} else {
+						elem.href = "http://" + elem.host + elem.pathname + "?from=" + escape(window.location.pathname + window.location.search) + elem.hash
+					}
+				}
+			})
+			
+			$("a.FileToggle").click(function(evnt) {
+				evnt.preventDefault()
+				evnt.stopPropagation()
+				
+				$(evnt.target).next("pre").slideToggle("fast")
+			})
+			
+			$("button").button()
+			
+			// For use by documents
+			$("button.spoiler").click(function(evnt) {
+				evnt.stopPropagation()
+				// The first line handles the weird output of the markdown parser I use,
+				// the second line handles HTML documents that do things properly.
+				$(event.target).parent("p").next("div.spoiler").slideToggle("fast")
+				$(event.target).next("div.spoiler").slideToggle("fast")
+			})
+			$("button.spoiler").parent("p").next("div.spoiler").css("display", "none")
+			$("button.spoiler + div.spoiler").css("display", "none")
+			
+			$("#More").click(function(evnt) {
+				evnt.stopPropagation()
+				
+				$("#MoreData").slideToggle("slow")
+			})
+			$("#Back").click(function(evnt) {
+				evnt.stopPropagation()
+				window.location.replace("http://" + window.location.host + {{$.FromUrl}})
+			})
+		})
+	</script>
+</head>
+<body>
+	<h2>{{.Meta.Name}}{{if ne .Meta.Version ""}} ({{.Meta.Version}}){{end}}</h2>
+
+	{{if ne .Meta.Header ""}}<p>{{.Meta.Header}}</p>{{end}}
+
+	{{if ne .Meta.Description ""}}{{.Meta.Description}}{{end}}
+
+	<p><button id="More">Show/Hide Details</button></p>
+	<div id="MoreData" style="display:none;">
+		<h3>Extra Data</h3>
+
+		{{if ne .Meta.Author ""}}<p>Addon written by: {{.Meta.Author}}</p>{{end}}
+		{{if ne .Meta.Version ""}}<p>Version: {{.Meta.Version}}</p>{{end}}
+
+		<p>Addon Path: <code>"{{.Source}}"</code></p>
+
+		<p>Load Priority: <code>"{{.Meta.LoadPriority}}"</code></p>
+
+		<h4>Tags:</h4>{{range $n, $v := .Meta.Tags}}
+		<li><code>"{{$n}}" = {{$v}}</code>{{if eq $n "Library"}} (Is this addon is an automatically managed library?){{else if eq $n "DocPack"}} (You should never see this, addons with these tags are not really addons.){{else if eq $n "TileSet"}} (Does this addon contains tileset information?){{else if eq $n "SaveSafe"}} (Can this addon be applied to worlds in progress?){{else if eq $n "DFHack"}} (Does this addon requires DFHack to operate?){{else if eq $n "HasTests"}} (Does this addon have template test files?){{else if eq $n "NotNormal"}} (Is this addon not a normal addon, eg should it be hidden during normal generation cycles?){{else if eq $n "Dev"}} (Is this addon something that will only be interesting to addon developers?){{end}}</li>{{else}}
+		<li>This addon has no tags.</li>{{end}}
+
+		<h4>Dependencies (automatically activated):</h4>{{range .Meta.Activates}}
+		<li><a href="/addondata?addon={{.}}">{{.}}</a></li>{{else}}
+		<li>This addon has no dependencies.</li>{{end}}
+
+		<h4>Incompatibilities:</h4>{{range .Meta.Incompatible}}
+		<li><a href="/addondata?addon={{.}}">{{.}}</a></li>{{else}}
+		<li>This addon has no incompatibilities.</li>{{end}}
+
+		<h4>Variables (and their defaults):</h4>
+		<script language="JavaScript">
+			// This is me being lazy, I really should do this with templates like everything else...
+			var vars = {{.Meta.Vars}}
+
+			var ok = false
+			for (var i in vars) {
+				if (vars[i].Name == "-") {
+					continue
+				}
+
+				ok = true
+				if (vars[i].Values.length > 0) {
+					document.write("<li>" + vars[i].Name + " (<code>" + i + "</code>): <code>\"" + vars[i].Values[0] + "\"</code></a>")
+				} else {
+					document.write("<li>" + vars[i].Name + " (<code>" + i + "</code>): No Default Value Specified</a>")
+				}
+			}
+			if (!ok) {
+				document.write("<li>This addon has no variables.</li>")
+			}
+		</script>
+
+		<h4>Addon Files:</h4>
+		{{range .Files}}<li><a class="FileToggle" href="javascript:void(0)">{{.Name}}</a><pre style="display:none;" class="border">{{printf "%s" .Content}}</pre></li>
+		{{else}}<li>This addon has no files (how is this even possible?).</li>{{end}}
+	</div>
+
+	<p><button id="Back">Back to {{$.FromName}}</button></p>
+</body>
+</html>
+{{end}}

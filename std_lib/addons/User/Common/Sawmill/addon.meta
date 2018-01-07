@@ -1,0 +1,8 @@
+{
+	"Header": "Advanced wood processing, makes aboveground and/or treeless forts a lot easier.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Wood Additions"
+	]
+}

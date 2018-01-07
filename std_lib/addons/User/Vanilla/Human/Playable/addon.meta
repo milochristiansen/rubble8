@@ -1,0 +1,8 @@
+{
+	"Header": "Makes humans playable (and dwarves unplayable).",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"User/Human/Nobles"
+	]
+}

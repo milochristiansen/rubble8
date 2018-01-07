@@ -1,0 +1,8 @@
+{
+	"Header": "The glass forge allows you to make armor and weapons from all three kinds of glass.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Fix Handedness"
+	]
+}

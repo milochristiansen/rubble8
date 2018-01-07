@@ -1,0 +1,10 @@
+{
+	"Header": "An automatic powered obsidian boulder caster.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered",
+		"Libs/Fluids"
+	]
+}

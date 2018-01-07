@@ -1,0 +1,10 @@
+{
+	"Tags": {
+		"Dev": true
+	},
+	"Header": "Adds `SHARED_OBJECT` tags to non-Rubble raws.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

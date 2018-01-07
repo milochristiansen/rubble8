@@ -1,0 +1,7 @@
+{
+	"Header": "Allows you to use orthoclase and microcline to make porcelain (in addition to kaolinite).",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

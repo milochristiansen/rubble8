@@ -1,0 +1,9 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "DFHack Lua functions for matching items against a filter.",
+	"Activates": [
+		"Libs/Items"
+	]
+}

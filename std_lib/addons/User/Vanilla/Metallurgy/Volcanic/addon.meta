@@ -1,0 +1,12 @@
+{
+	"Tags": {
+		"DFHack": true
+	},
+	"Header": "Adds a new alloy to the alloy furnace, volcanic.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Fluids",
+		"User/Metallurgy"
+	]
+}

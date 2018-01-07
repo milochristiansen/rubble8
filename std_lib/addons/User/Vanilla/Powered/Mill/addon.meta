@@ -1,0 +1,9 @@
+{
+	"Header": "A powered mill, grind items to powder.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered"
+	]
+}

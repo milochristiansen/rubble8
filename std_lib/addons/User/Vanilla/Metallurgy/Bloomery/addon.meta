@@ -1,0 +1,7 @@
+{
+	"Header": "Adds a \"Bloomery\" that can be used to make iron and steel in a more realistic manner.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

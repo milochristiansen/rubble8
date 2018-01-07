@@ -1,0 +1,7 @@
+{
+	"Header": "Changes color and availability of cave \"grasses\" to enhance the visual difference between caverns.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

@@ -1,0 +1,8 @@
+{
+	"Header": "Adds a new alloy to the alloy furnace, aluminum bronze.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"User/Metallurgy"
+	]
+}

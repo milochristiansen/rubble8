@@ -1,0 +1,15 @@
+{
+	"Header": "Adds a new playable race, the saurians.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Castes",
+		"User/Glass Forge"
+	],
+	"Vars": {
+		"SAURIAN_PLAYABLE": {
+			"Name": "Do you want to play saurians in fortress mode?",
+			"Values": ["true", "false"]
+		}
+	}
+}

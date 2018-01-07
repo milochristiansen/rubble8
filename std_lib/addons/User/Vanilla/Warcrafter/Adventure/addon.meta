@@ -1,0 +1,8 @@
+{
+	"Header": "Adventure mode reactions for armor, weapons, and other useful items.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"User/Warcrafter"
+	]
+}

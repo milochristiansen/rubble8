@@ -1,0 +1,13 @@
+{
+	"Tags": {
+		"Library": true
+	},
+		
+	"Header": "All the base templates and other such stuff, critical to normal operation.",
+	
+	"DescFile": "addon.md"
+	
+	# DO NOT under ANY circumstances add an Activates key to this addon!
+	# As EVERY other addon depends on this one, doing so will probably cause
+	# an infinite activation loop!
+}

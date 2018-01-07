@@ -1,0 +1,9 @@
+{
+	"Header": "A powered metal press, makes items from metal bars.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered"
+	]
+}

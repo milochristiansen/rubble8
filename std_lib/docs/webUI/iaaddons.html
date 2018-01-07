@@ -1,0 +1,169 @@
+{{with .State}}
+<!DOCTYPE html>
+<html><!-- This is also used for applying tilesets -->
+<head>
+	<title>Rubble Web UI: Select Addons</title>
+	
+	<link rel="stylesheet" type="text/css" href="axis/rubble/other/webUI/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="axis/rubble/other/webUI/theme.css"/>
+	
+	<script src="/axis/rubble/other/webUI/jquery.js"></script>
+	<script src="/axis/rubble/other/webUI/jquery-ui.js"></script>
+	<script type="text/javascript">
+		function Toggle(addon, state) {
+			var req = new XMLHttpRequest()
+			req.open("POST", "/toggle", false)
+			req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+			req.send("addon=" + encodeURIComponent(addon) + "&state=" + encodeURIComponent(state))
+		}
+
+		function Set(key, val) {
+			var req = new XMLHttpRequest()
+			req.open("POST", "/setvar", false)
+			req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+			req.send("key=" + encodeURIComponent(key) + "&val=" + encodeURIComponent(val))
+		}
+
+		$(document).ready(function() {
+			// Kill the back button as best I can. There may be a better way to do this, but I don't know it.
+			$("a").click(function(evnt) {
+				if (evnt.target.href === undefined && this.href !== undefined) {
+					evnt.preventDefault()
+					evnt.stopPropagation()
+					window.location.replace(this.href)
+				} else if (evnt.target.href !== undefined && evnt.target.href !== "" && evnt.target.href !== "#") {
+					evnt.preventDefault()
+					evnt.stopPropagation()
+					window.location.replace(evnt.target.href)
+				}
+			})
+			$("a").each(function(i, elem) {
+				// Fix addon links
+				if (elem.href.indexOf("/addondata?addon=") != -1) {
+					elem.href = elem.href + "&from={{urlquery $.Back_URL}}&fromname={{urlquery $.Name}}"
+				}
+				
+				// Fix doc links
+				if (elem.href.indexOf("/doc/") != -1) {
+					if (elem.search != "") {
+						elem.href = "http://" + elem.host + elem.pathname + elem.search + "&from=" + escape(window.location.pathname + window.location.search) + elem.hash
+					} else {
+						elem.href = "http://" + elem.host + elem.pathname + "?from=" + escape(window.location.pathname + window.location.search) + elem.hash
+					}
+				}
+			})
+			
+			$("#Tabs").tabs()
+			$("button").button()
+			$("select").selectmenu()
+			
+			$("#Region").on("selectmenuchange", function(evnt) {
+				evnt.stopPropagation()
+				
+				Set("_RUBBLE_IA_REGION_", evnt.target.value)
+			})
+			
+			$("input:checkbox").checkboxradio()
+			$("#AddonList label").click(function(evnt) {
+				evnt.stopPropagation()
+				var addon = $(this).prev("input").attr("name")
+				// Yes, the class check is the opposite of what it should be. It seems that the class is not toggled yet at this point.
+				var show = !$(this).hasClass("ui-checkboxradio-checked")
+				
+				Toggle(addon, show)
+				if (show) {
+					$(document.getElementById("VARS:"+addon)).show()
+				} else {
+					$(document.getElementById("VARS:"+addon)).hide()
+				}
+			})
+			
+			// Fix for stupid bug, at least I think it's a bug...
+			// If it wasn't for this check boxes that start checked would be stuck with
+			// a caret icon instead of a check mark or empty box.
+			$("#AddonList label > span.ui-icon").each(function(i, elem) {
+				$(elem).removeClass("ui-state-hover")
+			})
+			
+			$("#VarTab").change(function(evnt) {
+				if (evnt.target.name != "") {
+					Set(evnt.target.name, evnt.target.value)
+				}
+			})
+			$("#VarTab").on("selectmenuchange", function(evnt) {
+				if (evnt.target.name != "") {
+					Set(evnt.target.name, evnt.target.value)
+				}
+			})
+			
+			$("#SelectAll").click(function(evnt) {
+				evnt.stopPropagation()
+				$("#AddonList label").each(function(i, elem) {
+					if (!$(this).hasClass("ui-checkboxradio-checked")) {
+						$(elem).click() // Easy, lazy, but it works...
+					}
+				})
+			})
+			
+			$("#SelectNone").click(function(evnt) {
+				evnt.stopPropagation()
+				$("#AddonList label").each(function(i, elem) {
+					if ($(this).hasClass("ui-checkboxradio-checked")) {
+						$(elem).click() // Easy, lazy, but it works...
+					}
+				})
+			})
+			
+			$("#Apply").click(function(evnt) {
+				window.location.replace("http://" + window.location.host + "/pleasewait?to={{urlquery $.URL}}")
+			})
+			$("#Back").click(function(evnt) {
+				window.location.replace("http://" + window.location.host + "/")
+			})
+		})
+	</script>
+</head>
+<body>
+	<p><label for="Region">Region: </label><select id="Region">
+		<option selected>raw</option>{{range $.Regions}}
+		<option>{{.}}</option>{{end}}
+	</select></p>
+	
+	<div id="Tabs">
+	<ul>
+		<li><a href="#AddonTab">Addons</a></li>
+		<li><a href="#VarTab">Variables</a></li>
+	</ul>
+	<div id="AddonTab">
+		<div id="AddonList">
+		{{- range .Addons.List}}{{if and (and (not .Meta.Tags.Library) (not .Meta.Tags.DocPack)) (index .Meta.Tags $.Tag)}}
+		<p><input type="checkbox" {{if (index $.State.Active .Meta.Name)}}checked{{end}} name="{{.Meta.Name}}" id="ADDON:{{.Meta.Name}}"><label style="width: 400px; text-align: left;" for="ADDON:{{.Meta.Name}}"><a class="addon-name" href="/addondata?addon={{.Meta.Name}}">{{.Meta.Name}}</label></a> {{.Meta.Header}}</p>
+		{{- end}}{{end}}
+		</div>
+		<p><label>Select Addons: </label><button style="width: 80px;" id="SelectAll">All</button><button style="width: 80px;" id="SelectNone">None</button></p>
+	</div>
+	
+	<div id="VarTab">
+		{{- range .Addons.List}}{{if and (and (not .Meta.Tags.Library) (not .Meta.Tags.DocPack)) (index .Meta.Tags $.Tag)}}
+		<div id="VARS:{{.Meta.Name}}"{{if not (index $.State.Active .Meta.Name)}} style="display: none;"{{end}}>
+			{{- range $id, $var := .Meta.Vars}}{{$val := (index $.VarDefaults $id)}}{{if not (eq $var.Name "-")}}
+			<p><label for="VAR:{{$id}}" style="width: 25%; text-align: right; display: inline-block;">{{$var.Name}}: </label>
+			{{- if gt (len $var.Values) 1 -}}
+			&nbsp;<select id="VAR:{{$id}}" name="{{$id}}">
+			{{- range $cval := $var.Values}}
+				<option{{if eq $cval $val}} selected{{end}}>{{$cval}}</option>
+			{{- end}}
+			</select></p>
+			{{- else}}
+			<input type="text" value="{{$val}}" id="VAR:{{$id}}" name="{{$var.Name}}"></p>
+			{{- end}}{{end}}{{end}}
+		</div>
+		{{- end}}{{end}}
+	</div>
+	</div>
+	
+	<p><button style="width: 300px;" id="Apply">Apply Selected</button></p>
+	<p><button style="width: 300px;" id="Back">Back to Menu</button></p>
+</body>
+</html>
+{{end}}

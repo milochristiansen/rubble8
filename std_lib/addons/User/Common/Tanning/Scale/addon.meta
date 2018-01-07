@@ -1,0 +1,7 @@
+{
+	"Header": "Allows you to use scale like leather.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

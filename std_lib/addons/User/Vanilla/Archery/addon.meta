@@ -1,0 +1,8 @@
+{
+	"Header": "Adds the archers workshop, a building where you can make all types of ranged weapons and their ammo.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Wood Additions"
+	]
+}

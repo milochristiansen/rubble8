@@ -1,0 +1,13 @@
+{
+	"Tags": {
+		"Dev": true
+	},
+	
+	"Header": "A bunch of cheat reactions to allow for fast setup of testing forts.",
+	
+	"Description": "Build a \"Heavy Supply Wagon\" workshop, both the building and all reactions are free.\n\nUses animal caretaker skill (the most useless skill I could think of :p).",
+	
+	"Activates": [
+		"Libs/Base"
+	]
+}

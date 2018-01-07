@@ -1,0 +1,10 @@
+{
+	"Header": "A powered wood furnace, turn planks into ash or charcoal.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered",
+		"Libs/Wood Additions"
+	]
+}

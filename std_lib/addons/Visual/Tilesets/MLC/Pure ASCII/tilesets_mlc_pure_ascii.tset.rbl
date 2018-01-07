@@ -1,0 +1,6 @@
+
+[AUX_FILE:INIT.TXT]
+	[FONT:MLC 10x10 - Font.png]
+	[FULLFONT:MLC 16x16 - Font.png]
+	[GRAPHICS_FONT:MLC 10x10 - Font.png]
+	[GRAPHICS_FULLFONT:MLC 16x16 - Font.png]

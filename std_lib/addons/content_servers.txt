@@ -1,0 +1,16 @@
+
+# This file contain a list of all content servers known to me at the moment I packed this version for distribution.
+# 
+# To add more servers simply place the address of each one on a line by itself.
+
+# Uncomment the next line if you are running a test server on local host.
+#127.0.0.1:2220
+
+# No global servers known. Can you host one?
+# 
+# If you want to host a content server, contact me for a dedicated server binary
+# and instructions for it's use. The dedicated server is statically compiled and
+# self-contained, all you need to do is drop it into a directory and start it.
+# 64 or 32 bit x86 (and in some cases, ARM) Linux, OSX, Windows, Solaris, Plan9,
+# FreeBSD, etc binaries are all available on request. If your server runs it, I
+# can probably build a binary for it.

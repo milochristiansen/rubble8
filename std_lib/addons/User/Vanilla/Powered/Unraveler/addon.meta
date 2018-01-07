@@ -1,0 +1,9 @@
+{
+	"Header": "A powered unraveler, decomposes cloth items into cloth.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered"
+	]
+}

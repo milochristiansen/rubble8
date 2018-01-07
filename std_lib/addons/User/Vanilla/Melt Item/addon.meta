@@ -1,0 +1,8 @@
+{
+	"Header": "A properly balanced replacement for vanilla item melting.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Melt Item"
+	]
+}

@@ -1,0 +1,9 @@
+{
+	"Header": "Single tile powered boolean logic gates!",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered"
+	]
+}

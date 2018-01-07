@@ -1,0 +1,8 @@
+{
+	"Header": "A special workshop for all your early game armor and ammo needs.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Fix Handedness"
+	]
+}

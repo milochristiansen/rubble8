@@ -1,0 +1,9 @@
+{
+	"Header": "Encrust or dye items with bags of powder.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered"
+	]
+}

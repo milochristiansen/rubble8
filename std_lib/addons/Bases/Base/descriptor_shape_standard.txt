@@ -1,0 +1,245 @@
+[OBJECT:DESCRIPTOR_SHAPE]
+
+{!SHARED_SHAPE;STAR;
+	[NAME:star:stars]
+	[WORD:STAR]
+	[ADJ:three-pointed]
+	[ADJ:four-pointed]
+	[ADJ:five-pointed]
+	[ADJ:many-pointed]
+	[TILE:'*']
+}
+
+{!SHARED_SHAPE;CRESCENT;
+	[NAME:crescent:crescents]
+	[WORD:CRESCENT]
+	[ADJ:narrow]
+	[ADJ:thick]
+	[TILE:'(']
+}
+
+{!SHARED_SHAPE;CROSS;
+	[NAME:cross:crosses]
+	[WORD:CROSS_NOUN]
+	[ADJ:broad]
+	[ADJ:tall]
+	[ADJ:thin]
+	[TILE:'+']
+}
+
+{!SHARED_SHAPE;SQUARE;
+	[NAME:square:squares]
+	[TILE:254]
+}
+
+{!SHARED_SHAPE;CIRCLE;
+	[NAME:circle:circles]
+	[TILE:9]
+}
+
+{!SHARED_SHAPE;DIAMOND;
+	[NAME:diamond:diamonds]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;SUN;
+	[NAME:sun:suns]
+	[WORD:SUN]
+	[ADJ:shining]
+	[ADJ:blazing]
+	[TILE:15]
+}
+
+{!SHARED_SHAPE;MOON;
+	[NAME:moon:moons]
+	[WORD:MOON]
+	[ADJ:hidden]
+	[ADJ:full]
+	[ADJ:crescent]
+	[ADJ:half]
+	[TILE:7]
+}
+
+{!SHARED_SHAPE;WAVE;
+	[NAME:wave:waves]
+	[WORD:WAVE]
+	[TILE:247]
+}
+
+{!SHARED_SHAPE;MOUNTAIN;
+	[NAME:mountain:mountains]
+	[WORD:MOUNTAIN]
+	[TILE:30]
+}
+
+{!SHARED_SHAPE;CLOUD;
+	[NAME:cloud:clouds]
+	[TILE:236]
+}
+
+{!SHARED_SHAPE;GIZZARD_STONE;
+	[NAME:gizzard stone:gizzard stones]
+	[GEMS_USE_NOUN]
+	[TILE:9]
+}
+
+{!SHARED_SHAPE;SMOOTH_PEBBLE;
+	[NAME:pebble:pebbles]
+	[ADJ:smooth]
+	[GEMS_USE_ADJ_NOUN]
+	[TILE:9]
+}
+
+{!SHARED_SHAPE;OVAL_CABOCHON;
+	[NAME:cabochon:cabochons]
+	[ADJ:oval]
+	[GEMS_USE_ADJ_NOUN]
+	[TILE:9]
+}
+
+{!SHARED_SHAPE;ROUND_CABOCHON;
+	[NAME:cabochon:cabochons]
+	[ADJ:round]
+	[GEMS_USE_ADJ_NOUN]
+	[TILE:9]
+}
+
+{!SHARED_SHAPE;CUSHION_CABOCHON;
+	[NAME:cabochon:cabochons]
+	[ADJ:cushion]
+	[GEMS_USE_ADJ_NOUN]
+	[TILE:254]
+}
+
+{!SHARED_SHAPE;RECTANGULAR_CABOCHON;
+	[NAME:cabochon:cabochons]
+	[ADJ:rectangular]
+	[GEMS_USE_ADJ_NOUN]
+	[TILE:254]
+}
+
+{!SHARED_SHAPE;POINT_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:point cut]
+	[GEMS_USE_ADJ]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;TABLE_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:table cut]
+	[GEMS_USE_ADJ]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;SINGLE_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:single cut]
+	[GEMS_USE_ADJ]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;ROSE_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:rose cut]
+	[GEMS_USE_ADJ]
+	[TILE:9]
+}
+
+{!SHARED_SHAPE;BRIOLETTE_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:briolette cut]
+	[GEMS_USE_ADJ]
+	[TILE:9]
+}
+
+{!SHARED_SHAPE;EMERALD_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:emerald cut]
+	[GEMS_USE_ADJ]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;MARQUISE_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:marquise cut]
+	[GEMS_USE_ADJ]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;OVAL_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:oval cut]
+	[GEMS_USE_ADJ]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;PEAR_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:pear cut]
+	[GEMS_USE_ADJ]
+	[TILE:9]
+}
+
+{!SHARED_SHAPE;SQUARE_BRILLIANT_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:square brilliant cut]
+	[GEMS_USE_ADJ]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;RADIANT_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:radiant cut]
+	[GEMS_USE_ADJ]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;TRILLION_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:trillion cut]
+	[GEMS_USE_ADJ]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;ROUND_BRILLIANT_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:round brilliant cut]
+	[GEMS_USE_ADJ]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;BAGUETTE_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:baguette cut]
+	[GEMS_USE_ADJ]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;TAPERED_BAGUETTE_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:tapered baguette cut]
+	[GEMS_USE_ADJ]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;CUSHION_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:cushion cut]
+	[GEMS_USE_ADJ]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;OCTAGON_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:octagon cut]
+	[GEMS_USE_ADJ]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;SQUARE_CUT_GEM;
+	[NAME:gem:gems]
+	[ADJ:square cut]
+	[GEMS_USE_ADJ]
+	[TILE:4]
+}

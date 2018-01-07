@@ -1,0 +1,9 @@
+{
+	"Header": "A powered loom, the perfect place to use that thread you got from the powered spinner.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered"
+	]
+}

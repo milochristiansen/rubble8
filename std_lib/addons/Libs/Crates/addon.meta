@@ -1,0 +1,10 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "Adds infrastructure for \"crates\", eg bars that can be bought from caravans and then \"unpacked\" into items.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

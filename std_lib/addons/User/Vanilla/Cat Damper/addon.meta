@@ -1,0 +1,6 @@
+{
+	"Header": "Removes ADOPTS_OWNER and RETURNS_VERMIN_KILLS_TO_OWNER from the cat.",
+	"Activates": [
+		"Libs/Base"
+	]
+}

@@ -1,0 +1,7 @@
+{
+	"Header": "Adds chrysotile and asbestos for extra dwarfy, fire safe, cloth.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

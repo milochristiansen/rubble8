@@ -1,0 +1,8 @@
+{
+	"Header": "Adds more dwarf castes.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Castes"
+	]
+}

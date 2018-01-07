@@ -1,0 +1,5 @@
+[OBJECT:ITEM]
+
+[ITEM_TOY:ITEM_TOY_NEEDLE]
+[NAME:sewing needle:sewing needles]
+[HARD_MAT]

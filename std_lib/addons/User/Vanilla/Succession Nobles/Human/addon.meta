@@ -1,0 +1,8 @@
+{
+	"Header": "Adds \"overseer\" and \"former overseer\" nobles for succession forts.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"User/Human/Nobles"
+	]
+}

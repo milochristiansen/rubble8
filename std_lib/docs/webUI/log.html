@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rubble Web UI: Log</title>
+	
+	<link rel="stylesheet" type="text/css" href="/axis/rubble/other/webUI/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="/axis/rubble/other/webUI/theme.css"/>
+	
+	<script src="/axis/rubble/other/webUI/jquery.js"></script>
+	<script src="/axis/rubble/other/webUI/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("button").button()
+			
+			$("button.Back").click(function(evnt) {
+				window.location.replace("http://" + window.location.host + "/")
+			})
+			$("button.Quit").click(function(evnt) {
+				window.location.replace("http://" + window.location.host + "/kill")
+			})
+		})
+	</script>
+</head>
+<body>
+	<p><button style="width: 300px" class="Back">Back to Menu</button></p>
+	<p><button style="width: 300px" class="Quit">Exit Rubble</button></p>
+
+	{{if .Header}}{{if eq .State "error"}}<p>An error has occurred or Rubble has aborted, scroll to the end of the log for details.</p>{{else if eq .State "warn"}}<p>Action completed with warnings, scroll to the end of the log for details.</p>{{else}}<p>Action completed without errors.</p>{{end}}{{end}}
+
+	<pre>{{.Log}}</pre>
+
+	<p><button style="width: 300px" class="Back">Back to Menu</button></p>
+	<p><button style="width: 300px" class="Quit">Exit Rubble</button></p>
+</body>
+</html>

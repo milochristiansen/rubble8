@@ -1,0 +1,16 @@
+
+# Auto-Update Blacklist File.
+# 
+# Any addon packs listed here will be blocked from auto-updating.
+# 
+# Use this to prevent Rubble from updating your addons if you want
+# to use old versions for some reason.
+# 
+# Another use of this file is to prevent Rubble from trying to look
+# for updates when offline (so addons load faster).
+# 
+# To add an addon pack to this list simply place it's name on a line
+# by itself. If the addon pack file is "XYZ.zip" then you should list
+# "XYZ" here.
+
+

@@ -1,0 +1,11 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	
+	"Header": "Adds support for transforming castes.",
+	
+	"DescFile": "addon.md",
+	
+	"Activates": ["Libs/Base"]
+}

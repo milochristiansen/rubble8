@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rubble Web UI: Menu</title>
+
+	<link rel="stylesheet" type="text/css" href="/axis/rubble/other/webUI/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="/axis/rubble/other/webUI/theme.css"/>
+	
+	<script src="/axis/rubble/other/webUI/jquery.js"></script>
+	<script src="/axis/rubble/other/webUI/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#Menu").accordion()
+			
+			$("button").button()
+			$("button").click(function(evnt) {
+				evnt.stopPropagation()
+				evnt.preventDefault()
+            
+				var to = {
+					"Generate": "/genaddons",
+					"Tileset": "/tsetaddons",
+					"IApply": "/iaaddons",
+					"Addons": "/addons",
+					"Docs": "/doclist",
+					"Download": "/srvrpacks",
+					"Log": "/log",
+					"About": "/doc/Rubble License.md",
+					"Quit": "/kill",
+				}[evnt.target.id]
+            
+				if (to === undefined) {
+					return
+				}
+				window.location.replace("http://" + window.location.host + to)
+			})
+		})
+	</script>
+</head>
+<body>
+	<h1>Welcome to the Rubble Web UI!</h1>
+	<div id="Menu">
+		<h3>Generation</h3>
+		<div>
+			<p><button style="width: 300px" id="Generate">Generate raws</button></p>
+			<p><button style="width: 300px" id="Tileset">Switch a region's tileset</button></p>
+			<p><button style="width: 300px" id="IApply">Apply a save-safe addon to a region</button></p>
+		</div>
+		
+		<h3>Documentation</h3>
+		<div>
+			<p><button style="width: 300px" id="Addons">Addon documentation</button></p>
+			<p><button style="width: 300px" id="Docs">General documentation</button></p>
+		</div>
+		
+		<h3>Other</h3>
+		<div>
+			<p><button style="width: 300px" id="Download">Download addon packs</button></p>
+			<p><button style="width: 300px" id="Log">Current log file</button></p>
+			<p><button style="width: 300px" id="About">About Rubble</button></p>
+		</div>
+	</div>
+	<p><button id="Quit">Exit Rubble</button></p>
+</body>
+</html>

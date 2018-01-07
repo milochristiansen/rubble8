@@ -1,0 +1,7 @@
+{
+	"Header": "Allows creatures to give more than one skin based on size.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

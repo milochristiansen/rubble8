@@ -1,0 +1,7 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "Allows you to change the types of certain workshops after they have been built.",
+	"DescFile": "addon.md"
+}

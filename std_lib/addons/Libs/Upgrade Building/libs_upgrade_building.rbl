@@ -1,0 +1,6 @@
+
+{!TEMPLATE;DFHACK_REACTION_UPGRADE_BUILDING;source;dest;name;class;
+{DFHACK_REACTION;UPGRADE_BUILDING_%{source}_TO_%{dest};libs_upgrade_building -type "%{dest}" -loc [ \\LOCATION ];%{class}}
+	[NAME:%{name}]
+	[BUILDING:%{source}:NONE]
+}

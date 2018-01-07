@@ -1,0 +1,6 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "DFHack Lua functions for working with buildings."
+}

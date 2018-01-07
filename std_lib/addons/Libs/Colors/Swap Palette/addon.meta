@@ -1,0 +1,8 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "Allows addons to create per-world color palettes.",
+	"DescFile": "addon.md",
+	"Activates": []
+}

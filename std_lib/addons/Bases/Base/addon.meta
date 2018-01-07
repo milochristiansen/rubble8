@@ -1,0 +1,9 @@
+{
+	"Header": "The standard base addon. Contains Rubblized versions of the vanilla raw files.",
+	
+	"Author": "Tarn Adams, Rubble porting by Milo Christiansen",
+	
+	"DescFile": "addon.md",
+	
+	"Activates": ["Libs/Base", "Libs/Castes"]
+}

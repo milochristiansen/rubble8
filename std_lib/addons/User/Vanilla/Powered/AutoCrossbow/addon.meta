@@ -1,0 +1,9 @@
+{
+	"Header": "The mighty autocrossbow! Launches bolts, arrows, darts, etc as long as you can keep it fed.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered"
+	]
+}

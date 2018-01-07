@@ -1,0 +1,5 @@
+[OBJECT:ITEM]
+
+[ITEM_FOOD:ITEM_FOOD_PROCESSED]
+	[NAME:processed food]
+	[LEVEL:1]

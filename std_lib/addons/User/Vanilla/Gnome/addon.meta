@@ -1,0 +1,14 @@
+{
+	"Header": "Adds a new playable race, the gnomes.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Castes"
+	],
+	"Vars": {
+		"GNOME_PLAYABLE": {
+			"Name": "Do you want to play gnomes in fortress mode?",
+			"Values": ["true", "false"]
+		}
+	}
+}

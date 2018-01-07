@@ -1,0 +1,8 @@
+{
+	"Header": "The block cutter allows you to harness the wonderful power of dwarven masonry to cut blocks of any color.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"User/Block"
+	]
+}

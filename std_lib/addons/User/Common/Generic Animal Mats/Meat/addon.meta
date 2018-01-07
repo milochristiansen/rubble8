@@ -1,0 +1,7 @@
+{
+	"Header": "Generic animal meat (including organs).",
+	"Activates": [
+		"Libs/Base",
+		"User/Generic Animal Mats"
+	]
+}

@@ -1,0 +1,7 @@
+{
+	"Header": "Allows you to dig slade, once you get past it's guardians that is...",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

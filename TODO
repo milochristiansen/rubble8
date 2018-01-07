@@ -1,0 +1,83 @@
+
+It's the Energizer TODO list: It keeps growing, and growing, and growing...
+
+I use this file as a place for reminders and ideas, some entries will never make it, some will sit here and fester until
+I get inspired :P
+
+
+Standard Addons:
+----------------
+
+* Write tests that exercise most, if not all, of the standard templates.
+* Make a set of tileset mapping addons at least equivalent to what Rubble 6 had.
+* Fix `User/Powered/Clothier` so you can make clothing for non-main races.
+	* I need to do some research to see how the base game handles this stuff.
+* Finish writing raw consistency checker rules for all tags.
+* `Libs/Crates` has some problems with embark profiles. This really should be fixed somehow...
+
+
+Rubble Core:
+------------
+
+* When a script error happens inside template code that is parsed from script code the error gets logged (with minor
+  differences each level) several times. This can lead to extremely verbose logs.
+	* This is because each level is wrapping the error again, first a script error gets wrapped by the Rubble template
+	  parser, then it gets returned by the native script function that called the parser, which causes the script VM to
+	  wrap it again, then it gets passed to the template parser again, and again, and again until it finally makes it
+	  out and is logged.
+	* Basically a fix would require Rubble to examine any script errors to see if they are wrapping Rubble errors that
+	  are wrapping script errors and strip the extra levels of wrapping off.
+		* At least one level of wrapping needs to be retained so that the stack trace is preserved.
+		* Sadly striping extra wrapping will remove the stack traces from the upper levels, maybe it's better to keep the
+		  "exploding errors"?
+* How hard would it be to add a syntax for "depreciated tags" in the raw consistency checker rule format?
+	* Probably fairly hard, but a more generic "rule properties" system would be useful for other things too.
+	* By allowing rules to have key:value properties it would be possible to tag rules with extra information that could
+	  be useful for future uses of the engine. Obviously this would be useless for simple merging, but it may be useful
+	  for other stuff.
+* Write a "named tile" system.
+	* Tilesets will supply a archetype->tile mapping file (including support for TWBT overrides if the tileset uses them).
+	* Addons supply a object->archetype mapping file.
+	* The two mapping files are then used to generate a raw merger source file that is applied in the same way tileset
+	  files are applied now.
+	* There will be hundreds of archetypes, ranging from "rock wall", to "mechanism", to "minecart" and everything in
+	  between.
+		* Most hardcoded items will have an archetype, as will common item, material, etc categories. Most categories
+		  will have multiple variants, for example rock material tiles will have a bunch (not sure exactly how many).
+		* If an archetype has variants tilesets do not have to provide tiles for them all, if one or more are missing
+		  they will have fall backs defined (for example if no "decorative gem" tile is defined it will fall back to a
+		  generic "gem" tile).
+	* This will mostly cover tiles, colors are a whole different problem...
+	* Modification of existing raws will *not* be required. All that will be needed is an object->archetype mapping file.
+	* This will allow one set of tileset mappings to cover all addons. Even radical total conversions will work with any
+	  tileset with no modification to either one (provided they both support this system).
+	* Obviously some "helper" addons will be needed to automate generation of map file stubs. Sadly it will likely be
+	  impossible to make generation of ready-to-use map files of either type automatic.
+	* Provide templates for annotating objects with archetypes so that addon map files may generated from information in
+	  the raws (since it will be easier to keep things up-to-date when all the information is in one place).
+	* This system can be implemented as a library addon, no need to add more stuff to the Rubble core...
+	* Maybe I can enlist a tileset author to make the archetype lists, I don't really know which ones would be useful or
+	  not...
+	* This will be a fearsome amount of work, finish all the other unfinished stuff first!
+* The raw consistency checker brace counter is terribly inefficient, write a better solution.
+
+
+Interfaces:
+-----------
+
+* Add a way to access the other modes from the web mode.
+	* Basically a page where you select a mode, then fill in the command line options for that mode. The only tricky bit
+	  would be options that may be specified more than once, and that could be handled with a bit of JS.
+* I need a way to cleanly restart the dedicated content server.
+	* Currently you need to guess which process is the monitor, kill the monitor, then kill the server.
+	* I would like an interactive console, but I can't find a library that allows one to share a console with a live logger.
+		* It would be possible to provide an external administration program, although this would introduce security problems.
+		* What about allowing admin connections from local host only?
+* Currently the addon list page is one long dump of addon names. How hard would it be to display this as a collapsible tree?
+
+
+Other:
+------
+
+* My Lua VM has terrible error messages.
+	* The biggest problem right now is stack traces, they need more information.

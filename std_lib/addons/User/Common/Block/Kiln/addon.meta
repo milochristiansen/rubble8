@@ -1,0 +1,8 @@
+{
+	"Header": "Fire blocks of any color from clay.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"User/Block"
+	]
+}

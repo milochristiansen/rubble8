@@ -1,0 +1,7 @@
+{
+	"Header": "Cast iron anvils from iron bars at the smelter.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

@@ -1,0 +1,15 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "Adds a script module for working with random numbers.",
+	"DescFile": "addon.md",
+	"Vars": {
+		"LIBS_RANDOM_SEED": {
+			"Name": "Random seed (any string, leave blank for auto seed):",
+			"Values": [
+				""
+			]
+		}
+	}
+}

@@ -1,0 +1,6 @@
+{
+	"Header": "Adds the shovel, a simple digging tool that breaks after a while.",
+	"Activates": [
+		"Libs/Base"
+	]
+}

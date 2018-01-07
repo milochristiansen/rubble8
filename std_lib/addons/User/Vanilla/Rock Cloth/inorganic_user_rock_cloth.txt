@@ -1,0 +1,34 @@
+[OBJECT:INORGANIC]
+
+# These raws are by the Bay12 forums user "Tomsod".
+
+{!SHARED_INORGANIC;CHRYSOTILE;
+	[USE_MATERIAL_TEMPLATE:STONE_TEMPLATE]
+	[IS_STONE]
+	[THREAD_METAL:ASBESTOS:100]
+	[STATE_NAME_ADJ:ALL_SOLID:chrysotile]
+	[DISPLAY_COLOR:2:7:0] mostly grayish-green
+	[TILE:'='] looks layered with fuzzy "fur"
+	[SOLID_DENSITY:2550]
+	[MOLAR_MASS:277100]
+	Source: http://tera-3.ul.cs.cmu.edu/NASD/4dcb85c3-9fee-4c83-9e6d-fe6ce5522b59/China/disk1/50/31006968/OITFF/00000105.pdf
+	[SPEC_HEAT:1115]
+	[MELTING_POINT:12700]
+	Apparently is a form of serpentine which by the way should be more common
+	[ENVIRONMENT_SPEC:OLIVINE:CLUSTER_SMALL:70]
+}
+
+{!SHARED_INORGANIC;ASBESTOS;
+	[STATE_NAME_ADJ:ALL_SOLID:asbestos]
+	[STATE_NAME_ADJ:LIQUID:magma]
+	[DISPLAY_COLOR:7:0:1] surely white
+	[MATERIAL_VALUE:3]
+	[SPEC_HEAT:1100]
+	[IGNITE_POINT:NONE]
+	[MELTING_POINT:12700]
+	[HEATDAM_POINT:NONE]
+	[COLDDAM_POINT:NONE]
+	[SOLID_DENSITY:2500]
+	[STOCKPILE_THREAD_METAL] close enough
+	[ITEMS_SOFT]
+}

@@ -1,0 +1,10 @@
+[OBJECT:ITEM]
+
+{!SHARED_ITEM;TOOL;ITEM_TOOL_ARCHERY_SHAFT;
+	[NAME:ammo shaft bundle:ammo shaft bundles]
+	[VALUE:2]
+	[TILE:240]
+	[SIZE:1000]
+	[MATERIAL_SIZE:1]
+	[UNIMPROVABLE]
+}

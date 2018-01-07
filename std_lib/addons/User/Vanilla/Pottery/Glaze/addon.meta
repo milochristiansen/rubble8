@@ -1,0 +1,10 @@
+{
+	"Tags": {
+		"DFHack": false
+	},
+	"Header": "Greatly expands the glazing system.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

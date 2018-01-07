@@ -1,0 +1,9 @@
+{
+	"Header": "The mist generator makes clouds of lovely mist from water (or deadly magma mist from magma).",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered"
+	]
+}

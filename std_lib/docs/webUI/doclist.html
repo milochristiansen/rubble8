@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rubble Web UI: Documentation</title>
+	
+	<link rel="stylesheet" type="text/css" href="/axis/rubble/other/webUI/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="/axis/rubble/other/webUI/theme.css"/>
+
+	<script src="/axis/rubble/other/webUI/jquery.js"></script>
+	<script src="/axis/rubble/other/webUI/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// Kill the back button as best I can. There may be a better way to do this, but I don't know it.
+			$("a").click(function(evnt) {
+				if (evnt.target.href === undefined && this.href !== undefined) {
+					evnt.preventDefault()
+					evnt.stopPropagation()
+					window.location.replace(this.href)
+				} else if (evnt.target.href !== undefined && evnt.target.href !== "" && evnt.target.href !== "#") {
+					evnt.preventDefault()
+					evnt.stopPropagation()
+					window.location.replace(evnt.target.href)
+				}
+			})
+			$("a").each(function(i, elem) {
+				// Fix addon links
+				if (elem.href.indexOf("/addondata?addon=") != -1) {
+					elem.href = elem.href + "&from=" + escape(window.location.pathname + window.location.search) + "&fromname=Previous Page"
+				}
+			})
+			
+			$("button").button()
+			$("#Back").click(function(evnt) {
+				window.location.replace("http://" + window.location.host + "/")
+			})
+		})
+	</script>
+</head>
+<body>
+	<p>Stuff everyone should read:</p>
+	<li><a href="/doc/Rubble Readme.md">Rubble Readme</a></li>
+	<li><a href="/doc/Rubble Changelog.md">Rubble Changelog</a></li>
+
+	<p><div class="hr"></div></p>
+
+	<p>Extras:</p>
+	<li><a href="/doc/Rubble History and Philosophy.md">Rubble History and Philosophy</a></li>
+
+	<p><div class="hr"></div></p>
+
+	<p>For modders:
+	<li><a href="/doc/Rubble Basics.md">Rubble Basics</a></li>
+	<li><a href="/doc/Rubble Base Templates.md">Rubble Base Templates</a></li>
+	<li><a href="/doc/Rubble Conventions.md">Rubble Conventions</a></li>
+
+	<p><div class="hr"></div></p>
+
+	<p>Miscellaneous tutorials:
+	<li><a href="/doc/Tutorials/Common standard library templates.md">Common Standard Library Templates</a></li>
+	<li><a href="/doc/Tutorials/User templates.md">User Templates</a></li>
+	<li><a href="/doc/Tutorials/Tileset addons.md">Tileset Addons</a></li>
+	<li><a href="/doc/Tutorials/Rubble Content Servers.md">Interacting With a Content Server</a></li>
+	<li><a href="/doc/Tutorials/Setup Rubble as a tileset applier.md">Using Rubble as a Stand-Alone Tileset Applier</a></li>
+
+	{{if gt (len .) 0}}<p><div class="hr"></div></p><p>External Documentation:</p>
+	{{range .}}<li>{{.Header}}</li>
+	{{end}}{{end}}
+
+	<p><button id="Back">Back to Menu</button></p>
+</body>
+</html>

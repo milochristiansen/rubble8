@@ -1,0 +1,7 @@
+{
+	"Header": "Dig for some basic raw materials without needing to actually dig.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

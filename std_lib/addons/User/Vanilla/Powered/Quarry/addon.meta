@@ -1,0 +1,10 @@
+{
+	"Header": "A powered quarry, when built over clay or sand it provides raw materials.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered",
+		"Libs/Get Tile Material"
+	]
+}

@@ -1,0 +1,7 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "Adds DFHack Lua support for persistent time delays (they survive a save/load).",
+	"DescFile": "addon.md"
+}

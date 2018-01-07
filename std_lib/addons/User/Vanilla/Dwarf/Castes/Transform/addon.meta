@@ -1,0 +1,13 @@
+{
+	"Tags": {
+		"DFHack": true
+	},
+	"Header": "Allows you to change the caste of your dwarves at the guild hall for a nominal fee.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"User/Dwarf/Castes",
+		"Libs/Castes",
+		"Libs/Castes/Transform"
+	]
+}

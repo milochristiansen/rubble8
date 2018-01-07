@@ -1,0 +1,11 @@
+{
+	"Header": "Activate to keep Rubble from nuking your creature graphics.",
+	
+	"Vars": {
+		"_RUBBLE_NO_CLEAR_GRAPHICS_": {
+			# Setting the name to "-" keeps the web UI from displaying this var.
+			"Name": "-",
+			"Values": ["true"]
+		}
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"Tags": {
+		"DFHack": true
+	},
+	"Header": "A simple addon that installs my custom ASCII-like tileset (16x16 Text Will Be Text version).",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

@@ -1,0 +1,7 @@
+{
+	"Header": "Generic animal blood and pus.",
+	"Activates": [
+		"Libs/Base",
+		"User/Generic Animal Mats"
+	]
+}

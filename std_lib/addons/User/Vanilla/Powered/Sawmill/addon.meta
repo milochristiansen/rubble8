@@ -1,0 +1,10 @@
+{
+	"Header": "A powered sawmill used to cut wood, stone, and bone into blocks.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered",
+		"Libs/Wood Additions"
+	]
+}

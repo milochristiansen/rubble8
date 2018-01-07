@@ -1,0 +1,6 @@
+{
+	"Header": "Allows you to cook vermin at the kitchen to get cheap meat, a good emergency food source.",
+	"Activates": [
+		"Libs/Base"
+	]
+}

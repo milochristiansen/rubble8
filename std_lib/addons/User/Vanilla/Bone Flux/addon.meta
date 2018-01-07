@@ -1,0 +1,7 @@
+{
+	"Header": "Bake bones at the kiln to make calcite, a flux stone.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

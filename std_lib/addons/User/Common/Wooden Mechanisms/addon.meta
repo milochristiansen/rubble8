@@ -1,0 +1,6 @@
+{
+	"Header": "Make mechanisms from wood at the craftsdwarf.",
+	"Activates": [
+		"Libs/Base"
+	]
+}

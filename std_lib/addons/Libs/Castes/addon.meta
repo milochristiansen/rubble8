@@ -1,0 +1,11 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	
+	"Header": "Adds support for dynamically adding castes to a creature.",
+	
+	"DescFile": "addon.md",
+	
+	"Activates": ["Libs/Base"]
+}

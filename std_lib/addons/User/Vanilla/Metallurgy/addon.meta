@@ -1,0 +1,7 @@
+{
+	"Header": "Adds an \"Alloy Furnace\" that can be used to make alloys.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

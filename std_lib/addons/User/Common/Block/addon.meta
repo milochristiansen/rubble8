@@ -1,0 +1,9 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "Support for the addons in the \"Block\" group.",
+	"Activates": [
+		"Libs/Base"
+	]
+}

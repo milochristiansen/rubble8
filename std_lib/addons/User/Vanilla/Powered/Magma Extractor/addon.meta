@@ -1,0 +1,10 @@
+{
+	"Header": "An automatic powered machine that extracts metals from magma.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered",
+		"Libs/Fluids"
+	]
+}

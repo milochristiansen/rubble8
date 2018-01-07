@@ -1,0 +1,91 @@
+
+local ok, content = axis.read("df/data/init/interface.txt")
+if not ok then
+	rubble.error(content)
+end
+
+content = rubble.rawmerge([[
+	BIND:$:&|KEY:?
+]], [[
+	[BIND:SETUP_LOCAL_Y_UP:REPEAT_SLOW]
+		[KEY:W]
+	[BIND:SETUP_LOCAL_Y_DOWN:REPEAT_SLOW]
+		[KEY:S]
+	[BIND:SETUP_LOCAL_X_UP:REPEAT_SLOW]
+		[KEY:D]
+	[BIND:SETUP_LOCAL_X_DOWN:REPEAT_SLOW]
+		[KEY:A]
+	[BIND:SETUP_LOCAL_Y_MUP:REPEAT_SLOW]
+		[KEY:w]
+	[BIND:SETUP_LOCAL_Y_MDOWN:REPEAT_SLOW]
+		[KEY:s]
+	[BIND:SETUP_LOCAL_X_MUP:REPEAT_SLOW]
+		[KEY:d]
+	[BIND:SETUP_LOCAL_X_MDOWN:REPEAT_SLOW]
+		[KEY:a]
+	
+	[BIND:BUILDING_DIM_Y_UP:REPEAT_NOT]
+		[KEY:W]
+	[BIND:BUILDING_DIM_Y_DOWN:REPEAT_NOT]
+		[KEY:S]
+	[BIND:BUILDING_DIM_X_UP:REPEAT_NOT]
+		[KEY:D]
+	[BIND:BUILDING_DIM_X_DOWN:REPEAT_NOT]
+		[KEY:A]
+	[BIND:BUILDING_ORIENT_UP:REPEAT_NOT]
+		[KEY:w]
+	[BIND:BUILDING_ORIENT_LEFT:REPEAT_NOT]
+		[KEY:a]
+	[BIND:BUILDING_ORIENT_RIGHT:REPEAT_NOT]
+		[KEY:d]
+	[BIND:BUILDING_ORIENT_DOWN:REPEAT_NOT]
+		[KEY:s]
+	[BIND:BUILDING_ORIENT_NONE:REPEAT_NOT]
+		[KEY:x]
+]], content)
+
+ok, content = axis.write("df/data/init/interface.txt", content)
+if not ok then
+	rubble.error(content)
+end
+
+rubble.auxfile("init.txt", rubble.rawmerge([[
+	$:?(1,-1)
+]], [[
+	[SOUND:NO]
+	[INTRO:NO]
+	[WINDOWED:NO]
+	[GRAPHICS:YES]
+	[PRINT_MODE:TWBT]
+	[TRUETYPE:NO]
+	[FPS:YES]
+	[G_FPS_CAP:20]
+	[ARB_SYNC:YES]
+	[PRIORITY:REALTIME]
+	[MOUSE:NO]
+	[MACRO_MS:5]
+]], rubble.auxfile("init.txt")))
+
+rubble.auxfile("d_init.txt", rubble.rawmerge([[
+	$:?(1,-1)
+]], [[
+	[AUTOSAVE:SEASONAL]
+	[AUTOBACKUP:YES]
+	[AUTOSAVE_PAUSE:YES]
+	[INITIAL_SAVE:YES]
+	[PAUSE_ON_LOAD:YES]
+	[EMBARK_WARNING_ALWAYS:YES]
+	[POST_PREPARE_EMBARK_CONFIRMATION:ALWAYS]
+	
+	[LOG_MAP_REJECTS:YES]
+	[EMBARK_RECTANGLE:3:3]
+	[COFFIN_NO_PETS_DEFAULT:YES]
+	
+	[POPULATION_CAP:80]
+	[STRICT_POPULATION_CAP:100]
+	[BABY_CHILD_CAP:25:25]
+	[VISITOR_CAP:20]
+
+	[FORTRESS_SEED_CAP:10000]
+	[SHOW_FLOW_AMOUNTS:YES]
+]], rubble.auxfile("d_init.txt")))

@@ -1,0 +1,7 @@
+{
+	"Header": "Generic animal hide materials.",
+	"Activates": [
+		"Libs/Base",
+		"User/Generic Animal Mats"
+	]
+}

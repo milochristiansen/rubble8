@@ -1,0 +1,40 @@
+{
+	"Tags": {
+		"SaveSafe": true,
+		"DFHack": true
+	},
+	"Header": "Allows you to set a population cap that will override the default for this world.",
+	"DescFile": "addon.md",
+	"Vars": {
+		"baby_cap_absolute": {
+			"Name": "DF Child Cap (Absolute)",
+			"Values": [
+				"100"
+			]
+		},
+		"baby_cap_percent": {
+			"Name": "DF Child Cap (Percent)",
+			"Values": [
+				"1000"
+			]
+		},
+		"population_cap": {
+			"Name": "DF Population Cap",
+			"Values": [
+				"200"
+			]
+		},
+		"strict_population_cap": {
+			"Name": "DF Strict Population Cap",
+			"Values": [
+				"220"
+			]
+		},
+		"visitor_cap": {
+			"Name": "DF Visitor Population Cap",
+			"Values": [
+				"100"
+			]
+		}
+	}
+}

@@ -1,0 +1,14 @@
+{
+	"Tags": {
+		"DFHack": true
+	},
+	"Header": "Allows you to change the caste of your saurians at the meditation circle.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"User/Saurian",
+		"User/Saurian/Castes",
+		"Libs/Castes",
+		"Libs/Castes/Transform"
+	]
+}

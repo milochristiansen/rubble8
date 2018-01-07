@@ -1,0 +1,7 @@
+{
+	"Header": "Create a stone anvil that wears out after a while.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

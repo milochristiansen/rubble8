@@ -1,0 +1,7 @@
+{
+	"Header": "Adds a workshop for advanced shaping of bone.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

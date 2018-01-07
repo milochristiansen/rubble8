@@ -1,0 +1,10 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "Installs a Lua pseudo module that allows modification of the hard-coded build list.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Buildings"
+	]
+}

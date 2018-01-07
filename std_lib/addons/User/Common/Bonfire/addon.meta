@@ -1,0 +1,7 @@
+{
+	"Header": "Allows you to start fires.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}

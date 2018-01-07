@@ -1,0 +1,6 @@
+{
+	"Tags": {
+		"Library": true
+	},
+	"Header": "Installs a Lua pseudo module that contains functions for getting a tile material."
+}

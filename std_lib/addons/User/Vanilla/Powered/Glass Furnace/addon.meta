@@ -1,0 +1,9 @@
+{
+	"Header": "A powered glass furnace, turn sand into glass.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base",
+		"Libs/Powered",
+		"User/Powered"
+	]
+}

@@ -1,0 +1,236 @@
+
+# Keep your grubby fingers off!
+
+# This file is critical to proper operation!
+
+{
+"Dependencies": [
+	#  Yes, this works. No, you should not use it. (unless you REALLY know what you are doing!)
+],
+
+# More tags/extensions may be added by individual script runners.
+"TagsFirst": {
+	# Rubble Scripts
+	".pre":  ["PreScript"],
+	".post": ["PostScript"],
+	".mod":  ["ModuleScript"],
+	".load": ["LoadScript", "GlobalFile"],
+	".init": ["InitScript", "GlobalFile"],
+
+	# Other Rubble Files
+	".aux":      ["MiscAxillary"],
+	".tset":     ["TileSet"],
+	".text":     ["AUXText"],
+	".graphics": ["CreatureGraphics"],
+	".speech":   ["SpeechText"],
+
+	# DFHack Scripts
+	".dfcom":  ["CommandScript", "DFHack"],
+	".dfmod":  ["ModuleScript", "DFHack"],
+	".dfload": ["LoadScript", "DFHack"]
+},
+"TagsLast": {
+	# Language Extensions
+	".lua":  ["LangLua"],
+	".rb":   ["LangRuby"],
+
+	# Other File Types
+	".test":  ["TemplateTest"],
+	".txt":   ["RawFile"],
+	".rbl":   ["RawFile", "NoWrite"],
+	".rules": ["MergeRules"],
+	".twbt":  ["TWBTOverride"],
+	".png":   ["ImagePNG"],
+	".bmp":   ["ImageBMP"]
+},
+
+"Writers": [
+	{
+		"Desc": "Raw Files",
+		"Dir": "out/objects",
+		"Filter": {
+			"Skip":             false,
+			"NoWrite":          false,
+			"AUXText":          false,
+			"SpeechText":       false,
+			"CreatureGraphics": false,
+			"TileSet":          false,
+			"RawFile":          true
+		},
+		"Comment": "#",
+		"ExtHas": "",
+		"ExtGive": "",
+		"AddHeader": true,
+		"AllowIA": false
+	},
+	{
+		"Desc": "Auxiliary Text Files",
+		"Dir": "out/objects/text",
+		"Filter": {
+			"Skip":    false,
+			"NoWrite": false,
+			"RawFile": true,
+			"AUXText": true
+		},
+		"Comment": "",
+		"ExtHas": ".text.txt",
+		"ExtGive": ".txt",
+		"AddHeader": false,
+		"AllowIA": false
+	},
+	{
+		"Desc": "Speech Text Files",
+		"Dir": "df/data/speech",
+		"Filter": {
+			"Skip":       false,
+			"NoWrite":    false,
+			"RawFile":    true,
+			"SpeechText": true
+		},
+		"Comment": "",
+		"ExtHas": ".speech.txt",
+		"ExtGive": ".txt",
+		"AddHeader": false,
+		"AllowIA": false
+	},
+	{
+		"Desc": "Graphics Raws",
+		"Dir": "out/graphics",
+		"Filter": {
+			"Skip":             false,
+			"NoWrite":          false,
+			"CreatureGraphics": true,
+			"RawFile":          true
+		},
+		"Comment": "#",
+		"ExtHas": ".graphics.txt",
+		"ExtGive": ".txt",
+		"AddHeader": true,
+		"AllowIA": false
+	},
+	{
+		"Desc": "Graphics PNGs",
+		"Dir": "out/graphics",
+		"Filter": {
+			"Skip":             false,
+			"NoWrite":          false,
+			"CreatureGraphics": true,
+			"ImagePNG":         true
+		},
+		"Comment": "",
+		"ExtHas": ".graphics.png",
+		"ExtGive": ".png",
+		"AddHeader": false,
+		"AllowIA": false
+	},
+	{
+		"Desc": "Graphics BMPs",
+		"Dir": "out/graphics",
+		"Filter": {
+			"Skip":             false,
+			"NoWrite":          false,
+			"CreatureGraphics": true,
+			"ImageBMP":         true
+		},
+		"Comment": "",
+		"ExtHas": ".graphics.bmp",
+		"ExtGive": ".bmp",
+		"AddHeader": false,
+		"AllowIA": false
+	},
+	{
+		"Desc": "Tileset PNGs",
+		"Dir": "df/data/art",
+		"Filter": {
+			"Skip":     false,
+			"NoWrite":  false,
+			"TileSet":  true,
+			"ImagePNG": true
+		},
+		"Comment": "",
+		"ExtHas": ".tset.png",
+		"ExtGive": ".png",
+		"AddHeader": false,
+		"AllowIA": false
+	},
+	{
+		"Desc": "Tileset BMPs",
+		"Dir": "df/data/art",
+		"Filter": {
+			"Skip":     false,
+			"NoWrite":  false,
+			"TileSet":  true,
+			"ImageBMP": true
+		},
+		"Comment": "",
+		"ExtHas": ".tset.bmp",
+		"ExtGive": ".bmp",
+		"AddHeader": false,
+		"AllowIA": false
+	},
+	{
+		"Desc": "DFHack Pseudo Modules",
+		"Dir": "out/modules",
+		"Filter": {
+			"Skip":         false,
+			"NoWrite":      false,
+			"DFHack":       true,
+			"ModuleScript": true,
+			"LangLua":      true
+		},
+		"Comment": "--",
+		"ExtHas": ".dfmod.lua",
+		"ExtGive": ".lua",
+		"AddHeader": false,
+		"AllowIA": true
+	},
+	{
+		"Desc": "DFHack Load Scripts",
+		"Dir": "out/init.d",
+		"Filter": {
+			"Skip":       false,
+			"NoWrite":    false,
+			"DFHack":     true,
+			"LoadScript": true,
+			"LangLua":    true
+		},
+		"Comment": "--",
+		"ExtHas": ".dfload.lua",
+		"ExtGive": ".lua",
+		"AddHeader": false,
+		"AllowIA": true
+	},
+	{
+		"Desc": "DFHack Command Scripts (Lua)",
+		"Dir": "out/scripts",
+		"Filter": {
+			"Skip":          false,
+			"NoWrite":       false,
+			"DFHack":        true,
+			"CommandScript": true,
+			"LangLua":       true
+		},
+		"Comment": "--",
+		"ExtHas": ".dfcom.lua",
+		"ExtGive": ".lua",
+		"AddHeader": false,
+		"AllowIA": true
+	},
+	{
+		"Desc": "DFHack Command Scripts (Ruby)",
+		"Dir": "out/scripts",
+		"Filter": {
+			"Skip":          false,
+			"NoWrite":       false,
+			"DFHack":        true,
+			"CommandScript": true,
+			"LangRuby":      true
+		},
+		"Comment": "#",
+		"ExtHas": ".dfcom.rb",
+		"ExtGive": ".rb",
+		"AddHeader": false,
+		"AllowIA": true
+	}
+]
+}

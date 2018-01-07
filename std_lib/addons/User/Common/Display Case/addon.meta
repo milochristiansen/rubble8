@@ -1,0 +1,11 @@
+{
+	"Tags": {
+		# This uses DFHack, but does not require it.
+		"DFHack": false
+	},
+	"Header": "Adds a workshop for displaying items.",
+	"DescFile": "addon.md",
+	"Activates": [
+		"Libs/Base"
+	]
+}
