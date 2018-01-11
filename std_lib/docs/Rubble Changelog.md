@@ -14,10 +14,12 @@ new "minor" version.
 
 Please read this changelog carefully, all kinds of interesting/critical tidbits tend to get stuck in here.
 
-8.5.4 (For DF 44.3)
+
+8.5.4 (For DF 44.4) new DF and GitHub.
 ------------------------------------------------------------------------------------------------------------------------
 
-
+This version is mostly changes needed to put Rubble on GitHub, nothing major or even user visible. There are a few tweaks
+to the raws, but once again nothing major.
 
 Engine Changes:
 
@@ -26,6 +28,7 @@ Engine Changes:
 Addon and Standard Library Changes:
 
 * Fixed humans having stepladders in the `addon:Base` addon, as pointed out by bay12 user "somebears".
+* Updated `addon:Base` to DF 44.4 (changes are trivial).
 
 Other Changes:
 
