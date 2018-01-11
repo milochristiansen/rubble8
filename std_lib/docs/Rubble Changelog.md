@@ -15,6 +15,24 @@ new "minor" version.
 Please read this changelog carefully, all kinds of interesting/critical tidbits tend to get stuck in here.
 
 
+8.5.5 (For DF 44.4)
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+Engine Changes:
+
+* None.
+
+Addon and Standard Library Changes:
+
+* None
+
+Other Changes:
+
+* None
+
+
 8.5.4 (For DF 44.4) new DF and GitHub.
 ------------------------------------------------------------------------------------------------------------------------
 
