@@ -37,7 +37,7 @@ import "github.com/milochristiansen/rubble8/rblutil"
 // The Dwarf Fortress version this version of Rubble is intended to work with.
 // After Rubble has started the copies of these values found in the "rblutil" package may
 // have been updated with more accurate values, use them if possible.
-var DFVMajor, DFVMinor = 44, 4
+var DFVMajor, DFVMinor = 44, 7
 
 // This is the current Rubble version.
 var VMajor, VMinor, VPatch = 8, 5, 5
