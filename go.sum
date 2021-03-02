@@ -1,0 +1,6 @@
+github.com/knieriem/markdown v0.0.0-20140730233915-325ec6c40dd4 h1:eOcXTzexQIqS5zu/S1PBRo1PiSeFmOBHlkzfGsVfyhI=
+github.com/knieriem/markdown v0.0.0-20140730233915-325ec6c40dd4/go.mod h1:H4COpl46xonSuXrYDppXj3iFCs1wrv6gu1Vn6G0nfXw=
+github.com/milochristiansen/axis2 v0.0.0-20170331171230-20ad74518c74 h1:xZTlnGXTVo8KipqfUbtyVDkD6Rc5/p+R42qQ0BvGQx0=
+github.com/milochristiansen/axis2 v0.0.0-20170331171230-20ad74518c74/go.mod h1:Q36h23zIE5QBFwXyEp5yBKGXQJO+4yZRfPaOdg9dH70=
+github.com/milochristiansen/lua v1.1.7 h1:wbSNyRWF4KsLot7xFFbRW85EWshpVbJ8z8XWvqtxItI=
+github.com/milochristiansen/lua v1.1.7/go.mod h1:KwMw1rcD4Tw7v2o3UVuVjBpHhepyaIlzo7CxJlLrPyQ=
