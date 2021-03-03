@@ -112,7 +112,7 @@ func NewState(data *addon.Database, fs *axis2.FileSystem, log rblutil.Logger) (e
 
 	state.FS = fs
 
-	state.Tool = fs.Exists("df")
+	state.Tool = !fs.Exists("df")
 
 	state.Addons = data
 	state.GlobalFiles = data.Globals.Copy()
@@ -129,9 +129,9 @@ func NewState(data *addon.Database, fs *axis2.FileSystem, log rblutil.Logger) (e
 	// Now setup the global stuff.
 
 	state.Log.Println("  Loading Special Global Files...")
-	state.Log.Println("    Reading DF Init Files...")
 
 	if !state.Tool {
+		state.Log.Println("    Reading DF Init Files...")
 		var err error
 		state.Init, err = state.FS.ReadAll("df/data/init/init.txt")
 		if err != nil {
