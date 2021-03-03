@@ -458,7 +458,7 @@ Colors added by Bohandas.
 	[MELTING_POINT:11828]
 	[BOILING_POINT:14968]
 Density based on an alloy of 50% gold + 50% silver, per the recipe for creating it (1 gold + 1 silver = 2 electrum)
-Also found a more accurate source, which gives a range of 13000-16000 -- http//books.google.com/books?id=OuoV-o_Xf-EC&pg=PA21&lpg=PA21&dq=electrum+density&source=bl&ots=Ar0C0iCqq9&sig=hy58B_naO8sUQtmwdRUNfrmiwBI&hl=en&ei=9lisTqH9IIaHtweDx5T0Dg&sa=X&oi=book_result&ct=result&resnum=4&ved=0CDUQ6AEwAw
+Also found a more accurate source, which gives a range of 13000-16000 -- http://books.google.com/books?id=OuoV-o_Xf-EC&pg=PA21&lpg=PA21&dq=electrum+density&source=bl&ots=Ar0C0iCqq9&sig=hy58B_naO8sUQtmwdRUNfrmiwBI&hl=en&ei=9lisTqH9IIaHtweDx5T0Dg&sa=X&oi=book_result&ct=result&resnum=4&ved=0CDUQ6AEwAw
 	[SOLID_DENSITY:14905]
 	[LIQUID_DENSITY:13000]
 	[MOLAR_MASS:150000]
@@ -895,8 +895,8 @@ value of 11 is the weighted average value of 2copper/1silver/1gold components
 	[ITEMS_METAL]
 	[ITEMS_BARRED]
 	[ITEMS_SCALED]
-	[STATE_COLOR:ALL_SOLID:BLACK]
-} (actually dark blue, but this is less confusing)
+	[STATE_COLOR:ALL_SOLID:BLACK] (actually dark blue, but this is less confusing)
+}
 
 temperature values unknown, used gold
 value is weighted average of 3 gold and 1 copper

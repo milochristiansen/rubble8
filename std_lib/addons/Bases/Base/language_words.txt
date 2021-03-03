@@ -21980,3 +21980,9 @@
 		[FRONT_COMPOUND_ADJ]
 }
 
+{!SHARED_WORD;COMPANY;
+	[NOUN:company:companies]
+		[THE_NOUN_SING]
+		[OF_NOUN_PLUR]
+}
+

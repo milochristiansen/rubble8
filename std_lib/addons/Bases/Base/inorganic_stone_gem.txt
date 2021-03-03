@@ -2,7 +2,7 @@
 
 Many colors contributed by Bohandas
 
-Uristocrat: Lots of density data was taken from http//www.csgnetwork.com/gemchar.html
+Uristocrat: Lots of density data was taken from http://www.csgnetwork.com/gemchar.html
 There are a few misc. oddball gems, but many of these can be sorted
 into broader families like this
  
@@ -99,16 +99,16 @@ I'm leaving this data here in case it can someday be used to organize things in 
 [MATERIAL_VALUE:2][DISPLAY_COLOR:2:7:0][TILE:15][IS_GEM:bloodstone:STP:OVERWRITE_SOLID]
 [ENVIRONMENT:SEDIMENTARY:CLUSTER_SMALL:100]
 [SOLID_DENSITY:2650]  Common to quartz gems
-[STATE_COLOR:ALL_SOLID:SEA_GREEN]
-}  Bloodstones are actually dark green with red bands.
+[STATE_COLOR:ALL_SOLID:SEA_GREEN]  Bloodstones are actually dark green with red bands.
+}
 
 {!SHARED_INORGANIC;MOSS AGATE;
 [USE_MATERIAL_TEMPLATE:STONE_TEMPLATE]
 [MATERIAL_VALUE:2][DISPLAY_COLOR:2:7:0][TILE:15][IS_GEM:moss agate:STP:OVERWRITE_SOLID]
 [ENVIRONMENT:SEDIMENTARY:CLUSTER_SMALL:20]
 [SOLID_DENSITY:2650]  Common to quartz gems
-[STATE_COLOR:ALL_SOLID:WHITE]
-} These are mostly white with a dark green pattern.
+[STATE_COLOR:ALL_SOLID:WHITE] These are mostly white with a dark green pattern.
+}
 
 {!SHARED_INORGANIC;MOSS OPAL;
 [USE_MATERIAL_TEMPLATE:STONE_TEMPLATE]
@@ -211,16 +211,16 @@ I'm leaving this data here in case it can someday be used to organize things in 
 [MATERIAL_VALUE:2][DISPLAY_COLOR:6:7:0][TILE:15][IS_GEM:fire agate:STP:OVERWRITE_SOLID]
 [ENVIRONMENT:SEDIMENTARY:CLUSTER_SMALL:20]
 [SOLID_DENSITY:2650]  Common to quartz gems
-[STATE_COLOR:ALL_SOLID:LEMON]
-}  These change color depending on how you look at them.
+[STATE_COLOR:ALL_SOLID:LEMON]  These change color depending on how you look at them.
+}
 
 {!SHARED_INORGANIC;PLUME AGATE;
 [USE_MATERIAL_TEMPLATE:STONE_TEMPLATE]
 [MATERIAL_VALUE:2][DISPLAY_COLOR:6:7:0][TILE:15][IS_GEM:plume agate:STP:OVERWRITE_SOLID]
 [ENVIRONMENT:SEDIMENTARY:CLUSTER_SMALL:20]
 [SOLID_DENSITY:2650]  Common to quartz gems
-[STATE_COLOR:ALL_SOLID:CREAM]
-}  These are mostly red or yellow on white.
+[STATE_COLOR:ALL_SOLID:CREAM]  These are mostly red or yellow on white.
+}
 
 {!SHARED_INORGANIC;BROWN JASPER;
 [USE_MATERIAL_TEMPLATE:STONE_TEMPLATE]
@@ -235,8 +235,8 @@ I'm leaving this data here in case it can someday be used to organize things in 
 [MATERIAL_VALUE:3][DISPLAY_COLOR:6:7:0][TILE:15][IS_GEM:picture jasper:STP:OVERWRITE_SOLID]
 [ENVIRONMENT:SEDIMENTARY:CLUSTER_SMALL:100]
 [SOLID_DENSITY:2650]  Common to quartz gems
-[STATE_COLOR:ALL_SOLID:GOLDEN_YELLOW]
-}  Variable colors, often red.
+[STATE_COLOR:ALL_SOLID:GOLDEN_YELLOW]  Variable colors, often red.
+}
 
 {!SHARED_INORGANIC;SMOKY QUARTZ;
 [USE_MATERIAL_TEMPLATE:STONE_TEMPLATE]
@@ -710,7 +710,7 @@ green garnet found with chromium ores
 [STATE_COLOR:ALL_SOLID:VIOLET]
 }
 
-Occurs in metamorphic layers per this  http//www.emporia.edu/earthsci/amber/go336/berg/tanzanite.html
+Occurs in metamorphic layers per this:  http://www.emporia.edu/earthsci/amber/go336/berg/tanzanite.html
 Of course, it should also be really rare, because it only occurs in one part of the world.
 {!SHARED_INORGANIC;TANZANITE;
 [USE_MATERIAL_TEMPLATE:STONE_TEMPLATE]

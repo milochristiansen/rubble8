@@ -8,6 +8,7 @@
 	[ADJ:five-pointed]
 	[ADJ:many-pointed]
 	[TILE:'*']
+	[CATEGORY:SIMPLE]
 }
 
 {!SHARED_SHAPE;CRESCENT;
@@ -16,6 +17,7 @@
 	[ADJ:narrow]
 	[ADJ:thick]
 	[TILE:'(']
+	[CATEGORY:SIMPLE]
 }
 
 {!SHARED_SHAPE;CROSS;
@@ -25,21 +27,25 @@
 	[ADJ:tall]
 	[ADJ:thin]
 	[TILE:'+']
+	[CATEGORY:SIMPLE]
 }
 
 {!SHARED_SHAPE;SQUARE;
 	[NAME:square:squares]
 	[TILE:254]
+	[CATEGORY:SIMPLE]
 }
 
 {!SHARED_SHAPE;CIRCLE;
 	[NAME:circle:circles]
 	[TILE:9]
+	[CATEGORY:SIMPLE]
 }
 
 {!SHARED_SHAPE;DIAMOND;
 	[NAME:diamond:diamonds]
 	[TILE:4]
+	[CATEGORY:SIMPLE]
 }
 
 {!SHARED_SHAPE;SUN;
@@ -48,6 +54,7 @@
 	[ADJ:shining]
 	[ADJ:blazing]
 	[TILE:15]
+	[CATEGORY:SIMPLE]
 }
 
 {!SHARED_SHAPE;MOON;
@@ -58,23 +65,27 @@
 	[ADJ:crescent]
 	[ADJ:half]
 	[TILE:7]
+	[CATEGORY:SIMPLE]
 }
 
 {!SHARED_SHAPE;WAVE;
 	[NAME:wave:waves]
 	[WORD:WAVE]
 	[TILE:247]
+	[CATEGORY:SIMPLE]
 }
 
 {!SHARED_SHAPE;MOUNTAIN;
 	[NAME:mountain:mountains]
 	[WORD:MOUNTAIN]
 	[TILE:30]
+	[CATEGORY:SIMPLE]
 }
 
 {!SHARED_SHAPE;CLOUD;
 	[NAME:cloud:clouds]
 	[TILE:236]
+	[CATEGORY:SIMPLE]
 }
 
 {!SHARED_SHAPE;GIZZARD_STONE;
@@ -242,4 +253,73 @@
 	[ADJ:square cut]
 	[GEMS_USE_ADJ]
 	[TILE:4]
+}
+
+{!SHARED_SHAPE;PLATONIC_TETRAHEDRON;
+	[NAME:tetrahedron:tetrahedra]
+	[ADJ:tetrahedral]
+	[CATEGORY:PLATONIC]
+	not dice until we can do something like color tips
+	[FACES:4]
+	[TILE:30]
+}
+
+{!SHARED_SHAPE;PLATONIC_CUBE;
+	[NAME:cube:cubes]
+	[ADJ:cubic]
+	[CATEGORY:PLATONIC]
+	[CATEGORY:DICE]
+	[FACES:6]
+	[TILE:254]
+}
+
+{!SHARED_SHAPE;PLATONIC_OCTAHEDRON;
+	[NAME:octahedron:octahedra]
+	[ADJ:octahedral]
+	[CATEGORY:PLATONIC]
+	[CATEGORY:DICE]
+	[FACES:8]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;PLATONIC_DODECAHEDRON;
+	[NAME:dodecahedron:dodecahedra]
+	[ADJ:dodecahedral]
+	[CATEGORY:PLATONIC]
+	[CATEGORY:DICE]
+	[FACES:12]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;PLATONIC_ICOSAHEDRON;
+	[NAME:icosahedron:icosahedra]
+	[ADJ:icosahedral]
+	[CATEGORY:PLATONIC]
+	[CATEGORY:DICE]
+	[FACES:20]
+	[TILE:4]
+}
+
+{!SHARED_SHAPE;LONG_DIE_4;
+	[NAME:four-sided prism:four-sided prisms]
+	[ADJ:four-sided long]
+	[CATEGORY:DICE]
+	[FACES:4]
+	[TILE:45]
+}
+
+{!SHARED_SHAPE;LONG_DIE_6;
+	[NAME:six-sided prism:six-sided prisms]
+	[ADJ:six-sided long]
+	[CATEGORY:DICE]
+	[FACES:6]
+	[TILE:45]
+}
+
+{!SHARED_SHAPE;LONG_DIE_8;
+	[NAME:eight-sided prism:eight-sided prisms]
+	[ADJ:eight-sided long]
+	[CATEGORY:DICE]
+	[FACES:8]
+	[TILE:45]
 }

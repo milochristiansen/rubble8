@@ -2196,4 +2196,5 @@
 	[T_WORD:REASON:ograd]
 	[T_WORD:SQUAT:tumos]
 	[T_WORD:FESTIVAL:korsid]
+	[T_WORD:COMPANY:kƒtad]
 }
